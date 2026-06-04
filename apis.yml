@@ -1,0 +1,99 @@
+---
+aid: chulalongkorn
+name: Chulalongkorn University
+description: >-
+  Chulalongkorn University is Thailand's oldest and a leading public research
+  university, located in Bangkok and ranked #229 in the QS World University
+  Rankings 2025. Its public developer/API footprint is limited and largely
+  oriented toward identity and scholarly content: a campus single sign-on
+  (Chula SSO) authentication API for student/staff login, an institutional
+  repository (CUIR / Chula Digiverse, built on DSpace) exposing OAI-PMH and
+  REST interfaces, and a staff-only central data exchange (CU Data Gateway)
+  that offers an online API mode. There is no unified, openly documented
+  public developer portal; access to most services is gated to university
+  personnel or granted on request.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/chulalongkorn/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Thailand
+  - Identity
+  - Single Sign-On
+  - Institutional Repository
+  - Open Access
+  - OAI-PMH
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: chulalongkorn:sso
+    name: Chula SSO Authentication API
+    description: >-
+      Single sign-on authentication service for Chulalongkorn University,
+      allowing applications to securely authenticate students and staff using
+      their Chula ID without handling credentials directly. In production at
+      account.it.chula.ac.th since January 2017. Integration requires an appid
+      and appsecret, which developers must request by email; it is not
+      self-service.
+    humanURL: https://account.it.chula.ac.th/wiki/doku.php
+    baseURL: https://account.it.chula.ac.th/
+    tags: [ Identity, Single Sign-On, Authentication, Education ]
+    properties:
+      - type: Documentation
+        url: https://account.it.chula.ac.th/wiki/doku.php
+      - type: GitHub
+        url: https://github.com/krerk/ChulaSSO.Android
+  - aid: chulalongkorn:cuir
+    name: CUIR / Chula Digiverse Repository (OAI-PMH & DSpace REST)
+    description: >-
+      Chulalongkorn University Intellectual Repository (CUIR), now served via
+      the Chula Digiverse digital preservation platform built on DSpace. It
+      holds theses, dissertations, academic papers, learning materials and
+      archives, and exposes the standard DSpace OAI-PMH and REST interfaces for
+      metadata harvesting and programmatic discovery. The legacy CUIR host now
+      redirects to digiverse.chula.ac.th.
+    humanURL: https://digiverse.chula.ac.th/
+    baseURL: https://digiverse.chula.ac.th/server/api
+    tags: [ Institutional Repository, Open Access, OAI-PMH, DSpace, Research, Education ]
+    properties:
+      - type: Documentation
+        url: https://digiverse.chula.ac.th/
+  - aid: chulalongkorn:data-gateway
+    name: CU Data Gateway API
+    description: >-
+      The university's central data exchange system that consolidates and
+      shares data across departments. It supports two connection modes - Batch
+      (SFTP) and Online (API). Access is restricted to officially assigned
+      university personnel; there is no public sign-up and no public developer
+      documentation. The portal at datagateway.chula.ac.th did not resolve from
+      outside the campus network during review.
+    humanURL: https://www.it.chula.ac.th/service/data-gateway/
+    tags: [ Data, Data Exchange, Restricted, Education ]
+    properties:
+      - type: Documentation
+        url: https://www.it.chula.ac.th/service/data-gateway/
+common:
+  - type: Website
+    url: https://www.chula.ac.th/en/
+  - type: GitHub
+    url: https://github.com/ChulalongkornUniversity
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/chulalongkorn-university/
+  - type: DeveloperPortal
+    url: https://www.it.chula.ac.th/
+  - type: Plans
+    url: plans/chulalongkorn-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/chulalongkorn-rate-limits.yml
+  - type: FinOps
+    url: finops/chulalongkorn-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,0 +1,58 @@
+---
+name: Chulalongkorn University
+description: Chulalongkorn University public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/chulalongkorn/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 2
+    summary: >-
+      Chulalongkorn University has a real but limited and largely gated public
+      API footprint. Verified live: the official website, the IT department
+      site, the Chula SSO wiki/docs, the CUIR institutional repository (now
+      redirecting to Chula Digiverse on DSpace), and an official GitHub org.
+      The Chula SSO API and CU Data Gateway API both require credentials/keys
+      granted on request and are not self-service. The DSpace OAI-PMH and REST
+      endpoints returned HTTP 500 to external probes and the Data Gateway
+      portal did not resolve from outside the campus network, so those surfaces
+      are noted honestly as documented-but-unconfirmed-live. No endpoints were
+      fabricated; all API base/doc URLs derive from confirmed pages or standard
+      DSpace conventions for this platform.
+    endpoints:
+      - url: https://www.chula.ac.th/en/
+        status: 200
+        note: Official university website (English), live.
+      - url: https://www.it.chula.ac.th/
+        status: 200
+        note: Office of Information Technology site, used as developer/services hub.
+      - url: https://account.it.chula.ac.th/wiki/doku.php
+        status: 200
+        note: Chula SSO documentation wiki; appid/appsecret granted by email request.
+      - url: https://github.com/krerk/ChulaSSO.Android
+        status: 200
+        note: Official sample integration code referenced by the SSO wiki.
+      - url: https://account.it.chula.ac.th/sso/login
+        status: 404
+        note: Guessed SSO login path; not a valid endpoint.
+      - url: https://cuir.car.chula.ac.th/
+        status: 301
+        note: Legacy CUIR repository host; permanently redirects to digiverse.chula.ac.th.
+      - url: https://digiverse.chula.ac.th/
+        status: 200
+        note: Chula Digiverse DSpace repository homepage, live.
+      - url: https://digiverse.chula.ac.th/server/api
+        status: 500
+        note: DSpace REST API root; returned server error to external probe.
+      - url: https://digiverse.chula.ac.th/server/oai/request?verb=Identify
+        status: 500
+        note: DSpace OAI-PMH endpoint (standard path); returned server error to external probe.
+      - url: https://www.it.chula.ac.th/service/data-gateway/
+        status: 200
+        note: CU Data Gateway service description page; Online mode offers an API, staff-only.
+      - url: https://datagateway.chula.ac.th
+        status: 0
+        note: Data Gateway portal did not resolve from outside the campus network.
+      - url: https://github.com/ChulalongkornUniversity
+        status: 200
+        note: Official GitHub organization (1 public repo at time of review).
