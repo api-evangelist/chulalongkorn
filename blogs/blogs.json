@@ -1,0 +1,14 @@
+{
+  "repo": "chulalongkorn",
+  "feeds": [
+    {
+      "source": "https://www.chula.ac.th/en/news/",
+      "feed_url": "https://www.chula.ac.th/feed/",
+      "title": "Chulalongkorn University News",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-03T00:00:00Z"
+}

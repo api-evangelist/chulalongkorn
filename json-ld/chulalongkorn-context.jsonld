@@ -1,0 +1,84 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "chula": "https://www.chula.ac.th/ns#",
+    "schema": "https://schema.org/",
+    "name": "schema:name",
+    "url": "schema:url",
+    "description": "schema:description",
+    "logo": "schema:logo",
+    "sameAs": "schema:sameAs",
+    "address": "schema:address",
+    "telephone": "schema:telephone",
+    "foundingDate": "schema:foundingDate",
+    "department": "schema:department",
+    "api": {
+      "@id": "chula:api",
+      "@container": "@set"
+    },
+    "apiName": "schema:name",
+    "apiDescription": "schema:description",
+    "humanURL": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "baseURL": {
+      "@id": "chula:baseURL",
+      "@type": "@id"
+    },
+    "documentation": {
+      "@id": "schema:documentation",
+      "@type": "@id"
+    },
+    "repository": {
+      "@id": "chula:repository",
+      "@type": "@id"
+    },
+    "identifier": "schema:identifier",
+    "tags": {
+      "@id": "schema:keywords",
+      "@container": "@set"
+    }
+  },
+  "@type": "CollegeOrUniversity",
+  "@id": "https://www.chula.ac.th/en/",
+  "name": "Chulalongkorn University",
+  "url": "https://www.chula.ac.th/en/",
+  "description": "Thailand's oldest and a leading public research university, located in Bangkok.",
+  "foundingDate": "1917",
+  "sameAs": [
+    "https://github.com/ChulalongkornUniversity",
+    "https://www.linkedin.com/school/chulalongkorn-university/"
+  ],
+  "api": [
+    {
+      "@type": "WebAPI",
+      "identifier": "chulalongkorn:sso",
+      "apiName": "Chula SSO Authentication API",
+      "apiDescription": "Single sign-on authentication service for Chulalongkorn University, allowing applications to authenticate students and staff using their Chula ID.",
+      "humanURL": "https://account.it.chula.ac.th/wiki/doku.php",
+      "baseURL": "https://account.it.chula.ac.th/",
+      "documentation": "https://account.it.chula.ac.th/wiki/doku.php",
+      "tags": ["Identity", "Single Sign-On", "Authentication", "Education"]
+    },
+    {
+      "@type": "WebAPI",
+      "identifier": "chulalongkorn:cuir",
+      "apiName": "CUIR / Chula Digiverse Repository (OAI-PMH & DSpace REST)",
+      "apiDescription": "Institutional repository served via the Chula Digiverse platform built on DSpace, exposing OAI-PMH and REST interfaces for metadata harvesting and discovery.",
+      "humanURL": "https://digiverse.chula.ac.th/",
+      "baseURL": "https://digiverse.chula.ac.th/server/api",
+      "documentation": "https://digiverse.chula.ac.th/",
+      "tags": ["Institutional Repository", "Open Access", "OAI-PMH", "DSpace", "Research", "Education"]
+    },
+    {
+      "@type": "WebAPI",
+      "identifier": "chulalongkorn:data-gateway",
+      "apiName": "CU Data Gateway API",
+      "apiDescription": "Central data exchange system consolidating and sharing data across departments via Batch (SFTP) and Online (API) modes. Access restricted to university personnel.",
+      "humanURL": "https://www.it.chula.ac.th/service/data-gateway/",
+      "documentation": "https://www.it.chula.ac.th/service/data-gateway/",
+      "tags": ["Data", "Data Exchange", "Restricted", "Education"]
+    }
+  ]
+}
