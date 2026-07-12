@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.chula.ac.th
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Feb  5 23:59:59 2027 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: account.it.chula.ac.th
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Sep 23 00:56:49 2026 GMT
+  hsts: null
+- host: digiverse.chula.ac.th
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  3 06:14:28 2026 GMT
+  hsts: false
+domains:
+- domain: chula.ac.th
+  dnssec: true
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
