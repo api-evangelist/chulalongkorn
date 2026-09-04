@@ -2,123 +2,532 @@
 aid: chulalongkorn
 name: Chulalongkorn University
 description: >-
-  Chulalongkorn University is Thailand's oldest and a leading public research
-  university, located in Bangkok and ranked #229 in the QS World University
-  Rankings 2025. Its public developer/API footprint is limited and largely
-  oriented toward identity and scholarly content: a campus single sign-on
-  (Chula SSO) authentication API for student/staff login, an institutional
-  repository (CUIR / Chula Digiverse, built on DSpace) exposing OAI-PMH and
-  REST interfaces, and a staff-only central data exchange (CU Data Gateway)
-  that offers an online API mode. There is no unified, openly documented
-  public developer portal; access to most services is gated to university
-  personnel or granted on request.
+  Chulalongkorn University is Thailand's oldest public research university, founded in 1917
+  in Bangkok. Its programmable footprint is small, real, and almost entirely undeclared:
+  there is no developer portal, no open data portal, no published specification of any
+  kind, and no self-service registration anywhere in the estate. What it does operate are
+  two genuine institution-run surfaces. Chula SSO at account.it.chula.ac.th has been in
+  production since January 2017 and is documented endpoint-by-endpoint on a public wiki — a
+  modified CAS 1.0 protocol with an added application-authentication step, backed by the
+  university LDAP directory, with keys issued by email rather than by a console. The Office
+  of the Registrar's CU-REG Course Schedule application answers unauthenticated JSON at
+  cas.reg.chula.ac.th/class/api for its curriculum register and build version, though the
+  thirteen further endpoints its own client declares return 404 from outside the campus
+  network. Everything else that looks like a Chulalongkorn API belongs to somebody else:
+  Chula Digital Collections, which serves the university's only working OAI-PMH endpoint,
+  is a bepress Digital Commons tenancy (digital.car.chula.ac.th is a CNAME to
+  dcchula.bepress.com, adminEmail dc-support@elsevier.com); federated login is a Microsoft
+  Entra ID tenant; DOIs are registered through DataCite and, faculty by faculty, through
+  eleven separate Crossref member records. The institution's own DigiVerse repository
+  publishes no machine-readable interface at all, and the previously recorded claim that it
+  is a DSpace deployment exposing DSpace REST and OAI-PMH does not survive probing. The
+  central data exchange, CU Data Gateway, is restricted to assigned university personnel and
+  unreachable from outside the campus network.
 type: Index
 deliveryModel:
   model: saas
   open_source: false
-  commercial: true
-  callable_host: false
+  commercial: false
+  callable_host: true
   label: Hosted service · you call their endpoint
   confidence: medium
   source:
-  - pricing
-  generated: '2026-08-28'
-  method: derived
+  - probe
+  - documentation
+  generated: '2026-09-01'
+  method: probed
 accessModel:
   pricing: free
-  onboarding: unknown
+  onboarding: manual
   trial: false
   try_now: false
-  public: false
-  label: Free
-  confidence: medium
+  public: partial
+  label: Free · course data open, SSO keys issued by email on request
+  confidence: high
   source:
-  - plans
-  generated: '2026-07-22'
-  method: derived
-position: Consumer
+  - probe
+  - documentation
+  - authentication
+  generated: '2026-09-01'
+  method: probed
+position: Consuming
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/chulalongkorn.png
 url: https://raw.githubusercontent.com/api-evangelist/chulalongkorn/refs/heads/main/apis.yml
 tags:
-  - Education
-  - Higher Education
-  - University
-  - Thailand
-  - Identity
-  - Single Sign-On
-  - Institutional Repository
-  - Open Access
-  - OAI-PMH
+- Education
+- Higher Education
+- University
+- Research
+- Thailand
+- Bangkok
+- Identity Federation
+- Single Sign-On
+- Course Catalog
+- Research Repository
+- Library
+- Open Access
+- OAI-PMH
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-09-01'
 specificationVersion: '0.23'
 apis:
-  - aid: chulalongkorn:sso
-    name: Chula SSO Authentication API
-    description: >-
-      Single sign-on authentication service for Chulalongkorn University,
-      allowing applications to securely authenticate students and staff using
-      their Chula ID without handling credentials directly. In production at
-      account.it.chula.ac.th since January 2017. Integration requires an appid
-      and appsecret, which developers must request by email; it is not
-      self-service.
-    humanURL: https://account.it.chula.ac.th/wiki/doku.php
-    baseURL: https://account.it.chula.ac.th/
-    tags: [ Identity, Single Sign-On, Authentication, Education ]
-    properties:
-      - type: Documentation
-        url: https://account.it.chula.ac.th/wiki/doku.php
-      - type: GitHub
-        url: https://github.com/krerk/ChulaSSO.Android
-  - aid: chulalongkorn:cuir
-    name: CUIR / Chula Digiverse Repository (OAI-PMH & DSpace REST)
-    description: >-
-      Chulalongkorn University Intellectual Repository (CUIR), now served via
-      the Chula Digiverse digital preservation platform built on DSpace. It
-      holds theses, dissertations, academic papers, learning materials and
-      archives, and exposes the standard DSpace OAI-PMH and REST interfaces for
-      metadata harvesting and programmatic discovery. The legacy CUIR host now
-      redirects to digiverse.chula.ac.th.
-    humanURL: https://digiverse.chula.ac.th/
-    baseURL: https://digiverse.chula.ac.th/server/api
-    tags: [ Institutional Repository, Open Access, OAI-PMH, DSpace, Research, Education ]
-    properties:
-      - type: Documentation
-        url: https://digiverse.chula.ac.th/
-  - aid: chulalongkorn:data-gateway
-    name: CU Data Gateway API
-    description: >-
-      The university's central data exchange system that consolidates and
-      shares data across departments. It supports two connection modes - Batch
-      (SFTP) and Online (API). Access is restricted to officially assigned
-      university personnel; there is no public sign-up and no public developer
-      documentation. The portal at datagateway.chula.ac.th did not resolve from
-      outside the campus network during review.
-    humanURL: https://www.it.chula.ac.th/service/data-gateway/
-    tags: [ Data, Data Exchange, Restricted, Education ]
-    properties:
-      - type: Documentation
-        url: https://www.it.chula.ac.th/service/data-gateway/
+- aid: chulalongkorn:sso
+  name: Chula SSO Authentication API
+  description: >-
+    The university's own single sign-on service, in production at account.it.chula.ac.th
+    since January 2017 and originally built as part of the 2015 CU DataGateway project. The
+    protocol is a modified CAS 1.0 flow with an application-authentication step layered on
+    top: a relying application presents a DeeAppId / DeeAppSecret pair alongside the user's
+    ticket, so the SSO controls which applications may authenticate a Chula ID, and users
+    never hand credentials to the relying application. The public wiki documents /login,
+    /logout and /serviceValidation with their parameters, headers and JSON response bodies —
+    unusually complete prose for this cohort. What it does not do is publish a
+    machine-readable contract or offer self-service registration: keys are requested by
+    email from the architect named on the wiki. The OpenAPI recorded here is an API
+    Evangelist transcription of that page, marked derived, not something the university
+    published.
+  humanURL: https://account.it.chula.ac.th/wiki/doku.php
+  baseURL: https://account.it.chula.ac.th/
+  tags:
+  - Identity
+  - Single Sign-On
+  - Authentication
+  - CAS
+  - Education
+  properties:
+  - type: Documentation
+    url: https://account.it.chula.ac.th/wiki/doku.php
+  - type: APIReference
+    url: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
+  - type: OpenAPI
+    url: openapi/chulalongkorn-sso-openapi.yml
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-sso-user-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-sso-servicevalidation-example.json
+  - type: Authentication
+    url: authentication/chulalongkorn-authentication.yml
+  - type: SourceCode
+    url: https://github.com/krerk/ChulaSSO.Android
+  x-operator: institution
+  x-operator-basis: >-
+    account.it.chula.ac.th resolves to 161.200.194.26, inside Chulalongkorn's own
+    161.200.0.0 allocation, with no CNAME off university infrastructure. The wiki names the
+    university's own architect and the university LDAP directory as the backend. Designed,
+    built and run by the institution.
+- aid: chulalongkorn:course-schedule
+  name: CU-REG Course Schedule API
+  description: >-
+    The read-only JSON backend behind CU-REG Course Schedule, the Office of the Registrar's
+    public course, curriculum and timetable browser. Two endpoints answer HTTP 200 to an
+    unauthenticated request from outside the campus network — /course-studies, which returns
+    the curriculum register with degree and major names in Thai and English, credit totals
+    and offering windows, and /version. The Angular client declares thirteen further
+    endpoints against the same base (/course, /course-detail, /faculty, /instructor,
+    /exam-date and others); all thirteen returned 404 on probe, and they are recorded as
+    observations in the OpenAPI rather than promoted to a contract that cannot be
+    demonstrated. No key, no token, no published rate limit, no terms of use. A bare GET on the base
+    /class/api issues a 301 to http://cas.reg.chula.ac.th:8080/class/api/, leaking the
+    origin port and downgrading to plain HTTP.
+  humanURL: https://cas.reg.chula.ac.th/class/course-schedule
+  baseURL: https://cas.reg.chula.ac.th/class/api
+  tags:
+  - Course Catalog
+  - Curriculum
+  - Registrar
+  - Student Systems
+  - Education
+  properties:
+  - type: CourseCatalog
+    url: https://cas.reg.chula.ac.th/class/course-schedule
+  - type: OpenAPI
+    url: openapi/chulalongkorn-course-schedule-openapi.yml
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-course-study-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-course-studies-example.json
+  x-operator: institution
+  x-operator-basis: >-
+    cas.reg.chula.ac.th is the Office of the Registrar's own host under chula.ac.th;
+    www.reg.chula.ac.th resolves via cloud.reg.chula.ac.th to 161.200.133.239, in
+    Chulalongkorn's own allocation. The application, its build stamp and its data are the
+    registrar's; no vendor host, CNAME or contact appears anywhere in the client bundle or
+    the responses.
+- aid: chulalongkorn:digiverse
+  name: Chula DigiVerse — Institutional Digital Repository
+  description: >-
+    The university's digital preservation platform for theses, dissertations, rare books,
+    multimedia and digitised manuscripts, operated by the Office of Academic Resources.
+    cuir.car.chula.ac.th, the legacy CUIR host, now redirects here. It is institution-hosted:
+    digiverse.chula.ac.th resolves directly to 161.200.145.7, in the same university block
+    as car.chula.ac.th, with no CNAME to any vendor. It publishes no machine-readable
+    interface. A prior profile recorded DigiVerse as a DSpace deployment exposing DSpace
+    REST at /server/api and OAI-PMH at /server/oai — that is corrected here: the application
+    is a PHP/AngularJS stack (nginx, PHPSESSID, CodeIgniter 404 pages) and /server/api,
+    /rest/api, /api/, /digital/api/ and both OAI-PMH paths all return 404. Its own
+    robots.txt disallows /api/ and /digital/api/, so an API layer exists behind the
+    application; none of it is publicly reachable or documented.
+  humanURL: https://digiverse.chula.ac.th/
+  tags:
+  - Institutional Repository
+  - Research Repository
+  - Digital Preservation
+  - Open Access
+  - Education
+  properties:
+  - type: ResearchRepository
+    url: https://digiverse.chula.ac.th/
+  - type: Sitemap
+    url: https://digiverse.chula.ac.th/sitemap.xml
+  x-operator: institution
+  x-operator-basis: >-
+    digiverse.chula.ac.th → 161.200.145.7, Chulalongkorn's own address space, no CNAME. The
+    platform's shared assets (cookieconsent-cmu, sbs-directive.js, chartSBS.js) suggest a
+    Thai digital-library product reused across institutions rather than software the
+    university wrote, but there is no published contract to attribute either way — so this
+    is recorded as an institution-operated surface with no institution-published contract.
+- aid: chulalongkorn:digital-collections
+  name: Chula Digital Collections (bepress Digital Commons tenant)
+  description: >-
+    The university's open-access journals, theses and ETD platform, and the only working
+    OAI-PMH endpoint in the estate. The Identify response names "Chula Digital Collections",
+    ListSets returns 30 sets including Chulalongkorn University Theses and Dissertations and
+    a dozen university journals, and ListMetadataFormats offers nine prefixes including
+    oai_etdms and oai_openaire. The content, the sets, the DOIs and the collection policy
+    are Chulalongkorn's. The protocol implementation, the platform and the contract are
+    bepress Digital Commons's, now Elsevier's — recorded as a tenant relationship, with the
+    vendor's generic specification deliberately not saved under this institution.
+  humanURL: https://digital.car.chula.ac.th/
+  baseURL: https://digital.car.chula.ac.th/do/oai/
+  tags:
+  - Research Repository
+  - Open Access
+  - OAI-PMH
+  - ETD
+  - Journals
+  properties:
+  - type: ResearchRepository
+    url: https://digital.car.chula.ac.th/
+  - type: OAIPMH
+    url: https://digital.car.chula.ac.th/do/oai/?verb=Identify
+  - type: Metadata
+    url: oai-pmh/chulalongkorn-digital-collections-oai-identify.xml
+  - type: Conformance
+    url: conformance/chulalongkorn-conformance.yml
+  x-operator: tenant
+  x-operator-basis: >-
+    digital.car.chula.ac.th is a CNAME to dcchula.bepress.com (203.22.241.42/43), fronted by
+    Cloudflare, and the OAI-PMH Identify response gives adminEmail dc-support@elsevier.com.
+    An institution hostname on a vendor platform with an institution-specific account name —
+    the CNAME-tenancy class a hostname-only verdict cannot see. Corroborated independently
+    by Crossref member 36263, "Office of Academic Resources, Chulalongkorn University -
+    DIGITAL COMMONS JOURNALS".
+- aid: chulalongkorn:entra-federation
+  name: Chulalongkorn University Identity Federation (Microsoft Entra ID tenant)
+  description: >-
+    The university's cloud identity, and the most complete machine-readable contract
+    anywhere in this profile. Entra tenant 271d5e7b-1350-4b96-ab84-52dbda4cf40c carries the
+    federation brand name "Chulalongkorn University" and is authoritative as a Managed
+    namespace for both chula.ac.th and student.chula.ac.th. Its OpenID Connect discovery
+    document and its signed SAML 2.0 federation metadata both resolve HTTP 200 without
+    credentials. Two negatives were probed rather than assumed: Chulalongkorn has no entity
+    in eduGAIN — a full pull of 10,616 eduGAIN entities returned zero matches — and no
+    Shibboleth identity provider resolves under chula.ac.th.
+  humanURL: https://login.microsoftonline.com/chula.ac.th/v2.0/.well-known/openid-configuration
+  baseURL: https://login.microsoftonline.com/271d5e7b-1350-4b96-ab84-52dbda4cf40c/v2.0/.well-known/openid-configuration
+  tags:
+  - Identity Federation
+  - SAML
+  - OpenID Connect
+  - Single Sign-On
+  properties:
+  - type: IdentityFederation
+    url: identity-federation/chulalongkorn-identity-federation.yml
+  - type: Metadata
+    url: identity-federation/chulalongkorn-entra-saml-metadata.xml
+  - type: OpenIDConfiguration
+    url: identity-federation/chulalongkorn-entra-openid-configuration.json
+  - type: Authentication
+    url: authentication/chulalongkorn-authentication.yml
+  x-operator: federation
+  x-operator-basis: >-
+    A shared identity platform carrying the institution's own tenant, domains, brand and
+    attribute policy — the federation class the university pipeline contract names
+    explicitly. Microsoft operates the endpoints; the identity is Chulalongkorn's. Verified
+    via getuserrealm for both chula.ac.th and student.chula.ac.th (State 4, NameSpaceType
+    Managed, FederationBrandName "Chulalongkorn University").
+- aid: chulalongkorn:datacite
+  name: DataCite Membership (consortium organization lygd)
+  description: >-
+    Chulalongkorn University is a DataCite consortium organization, provider id lygd,
+    country TH, with one registered repository — lygd.aguxul, "Chula Digiverse", pointing at
+    digiverse.chula.ac.th. This is a membership and a fact about the institution, not a
+    contract it operates. The DataCite API is a registry shared by every member; its
+    specification is deliberately not saved under this institution, and the membership is
+    deliberately not deleted to tidy up a shared host.
+  humanURL: https://api.datacite.org/providers/lygd
+  baseURL: https://api.datacite.org/providers/lygd
+  tags:
+  - DOI
+  - Persistent Identifiers
+  - Research Data
+  - Registry
+  properties:
+  - type: Registry
+    url: https://api.datacite.org/providers/lygd
+  - type: Conformance
+    url: conformance/chulalongkorn-conformance.yml
+  x-operator: registry
+  x-operator-basis: >-
+    An identifier registry the institution is registered in. api.datacite.org is shared
+    because DOI registration is shared; the membership record lygd names Chulalongkorn
+    University specifically.
+- aid: chulalongkorn:crossref
+  name: Crossref Membership (eleven faculty and institute member records)
+  description: >-
+    Chulalongkorn registers Crossref DOIs through eleven separate member records, one per
+    faculty, institute or office, each with its own prefix — Engineering 10.4186, Medicine
+    10.5372, Architecture 10.54028, Economics 10.65681, Political Science 10.61462, Fine and
+    Applied Arts 10.56841, the Language Institute 10.66947, the Sustainable Environment
+    Research Institute 10.35762, the Metallurgy and Materials Science Research Institute
+    10.55713, and the Office of Academic Resources twice (10.58837 and 10.56808, the latter
+    explicitly for its Digital Commons journals). The fragmentation is the finding: the
+    university is a federation of buyers even in its own identifier registration.
+  humanURL: https://www.crossref.org/
+  baseURL: https://api.crossref.org/members?query=chulalongkorn
+  tags:
+  - DOI
+  - Persistent Identifiers
+  - Scholarly Publishing
+  - Registry
+  properties:
+  - type: Registry
+    url: https://api.crossref.org/members?query=chulalongkorn
+  - type: Conformance
+    url: conformance/chulalongkorn-conformance.yml
+  x-operator: registry
+  x-operator-basis: >-
+    An identifier registry the institution is registered in, eleven times over. The registry
+    contract is Crossref's; the memberships and prefixes are Chulalongkorn's.
+- aid: chulalongkorn:ror
+  name: ROR Registration (https://ror.org/028wp3y58)
+  description: >-
+    Chulalongkorn University's Research Organization Registry record, carrying the Thai and
+    English names, the acronym CU, ten Crossref Funder IDs, GRID grid.7922.e, ISNI
+    0000 0001 0244 7875 and Wikidata Q855730. The canonical machine-readable identifier for
+    the institution as an entity, and the join key every other registry in this profile
+    resolves against.
+  humanURL: https://ror.org/028wp3y58
+  baseURL: https://api.ror.org/v2/organizations/https://ror.org/028wp3y58
+  tags:
+  - Persistent Identifiers
+  - Organization Identifiers
+  - Registry
+  properties:
+  - type: Registry
+    url: https://api.ror.org/v2/organizations/https://ror.org/028wp3y58
+  x-operator: registry
+  x-operator-basis: >-
+    An organization registry the institution is registered in. ROR operates the API; the
+    record describes Chulalongkorn.
+- aid: chulalongkorn:library-discovery
+  name: Chula Library Discovery (EBSCO tenant)
+  description: >-
+    The Office of Academic Resources fronts its licensed-content discovery through EBSCO,
+    under the named customer account chulalun. The links published on car.chula.ac.th carry
+    that account explicitly (publications.ebsco.com?custId=chulalun, search.ebscohost.com
+    with authtype=ip). A real institutional tenancy; the discovery contract and its APIs are
+    EBSCO's and are documented by EBSCO, not by the university.
+  humanURL: https://www.car.chula.ac.th/
+  baseURL: https://search.ebscohost.com/login.aspx?authtype=ip
+  tags:
+  - Library
+  - Discovery
+  - Catalog
+  properties:
+  - type: LibraryCatalog
+    url: https://www.car.chula.ac.th/
+  x-operator: tenant
+  x-operator-basis: >-
+    Institution-published links carrying an institution-specific EBSCO customer id
+    (custId=chulalun) on shared vendor hosts (publications.ebsco.com, search.ebscohost.com).
+    Named scope on a vendor platform — a tenant relationship, not a Chulalongkorn contract.
+- aid: chulalongkorn:data-gateway
+  name: CU Data Gateway
+  description: >-
+    The university's central data exchange, consolidating and sharing data across
+    departments in two connection modes — batch over SFTP and online over an API. Access is
+    limited to officially assigned university personnel; there is no public sign-up and no
+    public developer documentation. The portal host datagateway.chula.ac.th resolves to
+    161.200.135.7 but does not answer from outside the campus network, and the service page
+    on www.it.chula.ac.th is intercepted by an Imperva bot challenge on every request.
+    Recorded as an institution-operated surface with no reachable contract — this is the
+    system Chula SSO was originally built for.
+  humanURL: https://www.it.chula.ac.th/service/data-gateway/
+  tags:
+  - Data
+  - Data Exchange
+  - Restricted
+  - Education
+  properties:
+  - type: Documentation
+    url: https://www.it.chula.ac.th/service/data-gateway/
+  x-operator: institution
+  x-operator-basis: >-
+    datagateway.chula.ac.th → 161.200.135.7, Chulalongkorn's own address space. The service
+    is described on the university's own IT service pages and is operated by the Office of
+    Information Technology.
 common:
-  - type: DomainSecurity
-    url: security/chulalongkorn-domain-security.yml
-  - type: Website
-    url: https://www.chula.ac.th/en/
-  - type: GitHub
-    url: https://github.com/ChulalongkornUniversity
-  - type: LinkedIn
-    url: https://www.linkedin.com/school/chulalongkorn-university/
-  - type: DeveloperPortal
-    url: https://www.it.chula.ac.th/
-  - type: Plans
-    url: plans/chulalongkorn-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/chulalongkorn-rate-limits.yml
-  - type: FinOps
-    url: finops/chulalongkorn-finops.yml
-  - type: Review
-    url: review.yml
+- type: Website
+  url: https://www.chula.ac.th/en/
+- type: APIReference
+  url: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
+- type: Documentation
+  url: https://account.it.chula.ac.th/wiki/doku.php
+- type: CourseCatalog
+  url: https://cas.reg.chula.ac.th/class/course-schedule
+- type: ResearchRepository
+  url: https://digiverse.chula.ac.th/
+- type: LibraryCatalog
+  url: https://www.car.chula.ac.th/
+- type: IdentityFederation
+  url: identity-federation/chulalongkorn-identity-federation.yml
+- type: Conformance
+  url: conformance/chulalongkorn-conformance.yml
+- type: Authentication
+  url: authentication/chulalongkorn-authentication.yml
+- type: AIPolicy
+  url: https://www.chula.ac.th/en/news/125190/
+- type: AITooling
+  url: https://genie.chula.ac.th/
+- type: Support
+  url: https://portal.it.chula.ac.th/home
+- type: GitHub
+  url: https://github.com/ChulalongkornUniversity
+- type: LinkedIn
+  url: https://www.linkedin.com/school/chulalongkorn-university/
+- type: DomainSecurity
+  url: security/chulalongkorn-domain-security.yml
+- type: Plans
+  url: plans/chulalongkorn-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/chulalongkorn-rate-limits.yml
+- type: FinOps
+  url: finops/chulalongkorn-finops.yml
+- type: Review
+  url: review.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
+x-type: university
+x-category: Public Research University
+x-coverage:
+  state: covered
+  reason: covered
+  detail: >-
+    Two institution-operated API surfaces were found, probed and contracted. Chula SSO
+    (account.it.chula.ac.th, 161.200.194.26, no CNAME) documents /login, /logout and
+    /serviceValidation with parameters, headers and JSON bodies on a public wiki, and the
+    CU-REG Course Schedule backend (cas.reg.chula.ac.th/class/api) returns unauthenticated
+    JSON for its curriculum register. Neither is published as a machine-readable contract by
+    the university; both OpenAPIs here are API Evangelist work, marked derived and probed
+    respectively, and neither is credited to the institution as something it published.
+
+    The registrar API is honestly partial: thirteen of the fifteen endpoints its own client
+    declares return 404 to an external unauthenticated caller, and that gap is recorded in
+    the spec under x-client-declared-endpoints rather than papered over.
+
+    One correction was made. The previous profile recorded the DigiVerse repository as a
+    DSpace deployment exposing DSpace REST at /server/api and OAI-PMH — a claim that does
+    not survive probing. DigiVerse is a PHP/AngularJS application and every one of those
+    paths returns 404. The dead baseURL has been removed. The estate's only working OAI-PMH
+    endpoint is at digital.car.chula.ac.th, which is a CNAME to dcchula.bepress.com with
+    adminEmail dc-support@elsevier.com — a bepress Digital Commons tenancy, recorded as a
+    tenant relationship rather than as a Chulalongkorn contract.
+
+    Four surfaces are relationships rather than contracts and are recorded as such: a
+    Microsoft Entra ID federation tenant, a DataCite consortium membership, eleven Crossref
+    member records, and a ROR registration. None of their specifications is saved here and
+    none of the relationships was deleted.
+
+    What genuinely does not exist: no developer portal (api., developer., data. and
+    opendata.chula.ac.th do not resolve), no open data portal, no llms.txt, no security.txt,
+    no OpenAPI published by the university, no OAuth or OIDC authorization server offered to
+    third parties, no self-service registration, no published rate limits, and no eduGAIN or
+    Shibboleth presence. Three university hosts — www.chula.ac.th, www.it.chula.ac.th and
+    lms.chula.ac.th — sit behind Imperva and answer a 212-byte Incapsula challenge to
+    non-browser clients even with full browser headers; that is a limit on our probe, not a
+    finding about the university, and those hosts are graded live.
+  assessed: '2026-09-01'
+  method: probed
+  evidence:
+  - url: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
+    status: 200
+  - url: https://cas.reg.chula.ac.th/class/api/course-studies
+    status: 200
+  - url: https://cas.reg.chula.ac.th/class/api/version
+    status: 200
+  - url: https://digital.car.chula.ac.th/do/oai/?verb=Identify
+    status: 200
+  - url: https://digital.car.chula.ac.th/do/oai/?verb=ListSets
+    status: 200
+  - url: https://login.microsoftonline.com/chula.ac.th/v2.0/.well-known/openid-configuration
+    status: 200
+  - url: https://login.microsoftonline.com/271d5e7b-1350-4b96-ab84-52dbda4cf40c/federationmetadata/2007-06/federationmetadata.xml
+    status: 200
+  - url: https://api.datacite.org/providers/lygd
+    status: 200
+  - url: https://api.crossref.org/members?query=chulalongkorn
+    status: 200
+  - url: https://api.ror.org/v2/organizations/https://ror.org/028wp3y58
+    status: 200
+  - url: https://digiverse.chula.ac.th/
+    status: 200
+  - url: https://www.car.chula.ac.th/
+    status: 200
+  - url: https://cas.reg.chula.ac.th/class/course-schedule
+    status: 200
+  - url: https://www.reg.chula.ac.th/
+    status: 200
+  - url: https://genie.chula.ac.th/
+    status: 200
+  - url: https://portal.it.chula.ac.th/home
+    status: 200
+  - url: https://www.chula.ac.th/en/news/125190/
+    status: 200
+  - url: https://github.com/ChulalongkornUniversity
+    status: 200
+  - url: https://www.chula.ac.th/en/
+    status: 200
+  - url: https://www.it.chula.ac.th/service/data-gateway/
+    status: 200
+  - url: https://cas.reg.chula.ac.th/class/api/faculty
+    status: 404
+  - url: https://digiverse.chula.ac.th/server/api
+    status: 404
+  - url: https://digiverse.chula.ac.th/server/oai/request?verb=Identify
+    status: 404
+  - url: https://digiverse.chula.ac.th/digital/api/
+    status: 404
+  - url: https://www.chula.ac.th/llms.txt
+    status: 404
+  - url: https://www.chula.ac.th/.well-known/security.txt
+    status: 404
+  - url: https://datagateway.chula.ac.th/
+    status: 0
+  - url: https://data.chula.ac.th/
+    status: 0
+  - url: https://api.chula.ac.th/
+    status: 0
+  - url: https://cuir.chula.ac.th/
+    status: 0
+x-enrichment:
+  pipeline: pipeline-university.md
+  run: '2026-09-01'
+  notes: >-
+    Re-profiled under the university pipeline's operator axis. Every surface now carries an
+    x-operator and an x-operator-basis. Two institution-operated contracts were derived and
+    saved; one vendor tenancy invisible to a hostname verdict (bepress via CNAME) was found
+    and recorded as a relationship; one false DSpace/OAI-PMH claim and one dead baseURL were
+    removed.
