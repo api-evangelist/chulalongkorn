@@ -1,0 +1,192 @@
+specification: API Evangelist Domain Standard Conformance
+specificationVersion: '0.1'
+provider: Chulalongkorn University
+providerId: chulalongkorn
+regime: education
+generated: '2026-09-01'
+method: probed
+source: >-
+  Live OAI-PMH Identify, ListSets and ListMetadataFormats against
+  https://digital.car.chula.ac.th/do/oai/ (all HTTP 200, archived under oai-pmh/); the
+  DataCite REST API at https://api.datacite.org/providers/lygd and
+  https://api.datacite.org/clients?provider-id=lygd; the Crossref REST API at
+  https://api.crossref.org/members?query=chulalongkorn; ROR
+  https://api.ror.org/v2/organizations/https://ror.org/028wp3y58; Microsoft Entra SAML
+  federation metadata for tenant 271d5e7b-1350-4b96-ab84-52dbda4cf40c; and negative probes
+  of the eduGAIN entity list, the institution's own DigiVerse repository and the CU-REG
+  registrar API.
+description: >-
+  Conformance against the Kin Score `education` regime standards list (scim, lti,
+  oneroster, ed-fi, caliper, qti, oai-pmh, shibboleth, saml, orcid, datacite, crossref).
+  Reward-only, and operator-qualified: a standard is recorded only where a live artifact
+  demonstrates it, and each hit carries the operator of the thing that implements it.
+
+  The result is characteristic of the cohort and worth stating plainly. Every standard
+  Chulalongkorn conforms to is implemented by somebody else — bepress/Elsevier for
+  OAI-PMH, Microsoft for SAML, DataCite and Crossref for DOI registration. The two
+  surfaces the university engineers itself, Chula SSO and the CU-REG course schedule API,
+  conform to nothing on this list: the SSO is a bespoke CAS 1.0 variant rather than SAML or
+  OIDC, and the registrar API is an ad-hoc JSON contract rather than OneRoster, Ed-Fi or
+  QTI. That is not a criticism of either; it is the measurement.
+
+conforms:
+- standard: oai-pmh
+  name: OAI-PMH 2.0
+  status: conformant
+  x-operator: tenant
+  confidence: high
+  evidence:
+    url: https://digital.car.chula.ac.th/do/oai/?verb=Identify
+    status: 200
+    archived: oai-pmh/chulalongkorn-digital-collections-oai-identify.xml
+    locations:
+    - 'OAI-PMH/Identify/repositoryName = Chula Digital Collections'
+    - 'OAI-PMH/Identify/protocolVersion = 2.0'
+    - 'OAI-PMH/Identify/granularity = YYYY-MM-DDThh:mm:ssZ'
+    - 'OAI-PMH/Identify/earliestDatestamp = 2000-01-19T00:00:00Z'
+    - 'OAI-PMH/Identify/description/oai-identifier/repositoryIdentifier = digital.car.chula.ac.th'
+    corroboration:
+      list_sets_status: 200
+      sets: 30
+      sets_archived: oai-pmh/chulalongkorn-digital-collections-oai-listsets.xml
+      metadata_formats:
+      - simple-dublin-core
+      - oai_dc
+      - oai-dc
+      - dcs
+      - qualified-dublin-core
+      - qdc
+      - dcq
+      - oai_etdms
+      - oai_openaire
+      sample_set: 'publication:chulaetd — Chulalongkorn University Theses and Dissertations'
+      list_identifiers_status: 200
+  note: >-
+    A complete and genuinely working OAI-PMH 2.0 endpoint, including the ETD-MS and
+    OpenAIRE profiles, exposing 30 sets of Chulalongkorn journals, theses and collections.
+    It is recorded as tenant, not institution, on two pieces of evidence: the host
+    digital.car.chula.ac.th is a CNAME to dcchula.bepress.com, and the Identify response
+    gives adminEmail dc-support@elsevier.com. The content, the sets and the collection
+    policy are the university's; the protocol implementation is bepress Digital Commons's.
+  counter_evidence: >-
+    The institution's OWN repository, DigiVerse at digiverse.chula.ac.th, publishes no
+    OAI-PMH interface. /oai/request?verb=Identify, /server/oai/request?verb=Identify,
+    /server/api, /rest/api, /api/ and /digital/api/ all return HTTP 404 from a PHP
+    application, and the previously recorded claim that DigiVerse is a DSpace deployment
+    exposing DSpace REST and OAI-PMH does not survive probing. That claim has been
+    corrected in apis.yml by this run.
+
+- standard: saml
+  name: SAML 2.0
+  status: conformant
+  x-operator: federation
+  confidence: high
+  evidence:
+    url: https://login.microsoftonline.com/271d5e7b-1350-4b96-ab84-52dbda4cf40c/federationmetadata/2007-06/federationmetadata.xml
+    status: 200
+    archived: identity-federation/chulalongkorn-entra-saml-metadata.xml
+    locations:
+    - 'EntityDescriptor[@entityID="https://sts.windows.net/271d5e7b-1350-4b96-ab84-52dbda4cf40c/"]'
+    corroboration:
+      tenant_id: 271d5e7b-1350-4b96-ab84-52dbda4cf40c
+      federation_brand_name: Chulalongkorn University
+      namespace_type: Managed
+      domains: [ chula.ac.th, student.chula.ac.th ]
+      oidc_discovery_status: 200
+  note: >-
+    Signed SAML 2.0 federation metadata for the university's own Entra ID tenant, resolvable
+    without credentials, authoritative for both the staff and student domains. Institution
+    identity on Microsoft engineering — recorded as federation, which is the operator class
+    the university pipeline contract assigns to an Entra tenant.
+
+- standard: datacite
+  name: DataCite DOI registration
+  status: conformant
+  x-operator: registry
+  confidence: high
+  evidence:
+    url: https://api.datacite.org/providers/lygd
+    status: 200
+    locations:
+    - 'data/attributes/name = Chulalongkorn University'
+    - 'data/attributes/memberType = consortium_organization'
+    - 'data/attributes/country = TH'
+    - 'data/attributes/website = https://digiverse.chula.ac.th/'
+    corroboration:
+      repository_api: https://api.datacite.org/clients?provider-id=lygd
+      repository_api_status: 200
+      repositories:
+      - id: lygd.aguxul
+        name: Chula Digiverse
+        url: https://digiverse.chula.ac.th/
+  note: >-
+    A membership, not a contract. Chulalongkorn is a DataCite consortium organization with
+    one registered repository. The DataCite API is a registry shared by every member and its
+    specification is deliberately NOT saved under this institution; the membership itself is
+    a fact about Chulalongkorn and is recorded as one.
+
+- standard: crossref
+  name: Crossref DOI registration
+  status: conformant
+  x-operator: registry
+  confidence: high
+  evidence:
+    url: https://api.crossref.org/members?query=chulalongkorn
+    status: 200
+    locations:
+    - 'message/total-results = 11'
+    corroboration:
+      members:
+      - { id: 2693, name: 'Faculty of Engineering, Chulalongkorn University', prefix: '10.4186' }
+      - { id: 3493, name: 'Faculty of Medicine, Chulalongkorn University (Asian Biomedicine)', prefix: '10.5372' }
+      - { id: 20934, name: 'Sustainable Environment Research Institute, Chulalongkorn University', prefix: '10.35762' }
+      - { id: 32231, name: 'Faculty of Architecture, Chulalongkorn University', prefix: '10.54028' }
+      - { id: 34397, name: 'Metallurgy and Materials Science Research Institute, Chulalongkorn University', prefix: '10.55713' }
+      - { id: 36263, name: 'Office of Academic Resources, Chulalongkorn University - DIGITAL COMMONS JOURNALS', prefix: '10.56808' }
+      - { id: 36305, name: 'Faculty of Fine and Applied Arts, Chulalongkorn University', prefix: '10.56841' }
+      - { id: 37481, name: 'Office of Academic Resources, Chulalongkorn University', prefix: '10.58837' }
+      - { id: 44112, name: 'Faculty of Political Science Chulalongkorn University', prefix: '10.61462' }
+      - { id: 55201, name: 'Faculty of Economics, Chulalongkorn University', prefix: '10.65681' }
+      - { id: 56654, name: 'Chulalongkorn University Language Institute', prefix: '10.66947' }
+  note: >-
+    Eleven separate Crossref member records with eleven DOI prefixes, registered
+    faculty-by-faculty and institute-by-institute rather than centrally. That fragmentation
+    is itself the finding: the university is a federation of buyers even in its own
+    identifier registration. Member 36263 explicitly names the Digital Commons journals
+    platform, corroborating the bepress tenancy from a second, independent source.
+
+not_conformant:
+- standard: shibboleth
+  status: not_found
+  detail: >-
+    No Shibboleth identity provider was located. A full pull of the eduGAIN technical
+    entity list (HTTP 200, 10,616 entities) on 2026-09-01 returned zero entities matching
+    "chula", and no idp./shibboleth./sso. host resolves under chula.ac.th. The university's
+    federated login is the Entra tenant recorded above; its campus SSO is a CAS variant.
+- standard: orcid
+  status: not_found
+  detail: >-
+    7,177 ORCID records carry a Chulalongkorn University affiliation, which evidences
+    researcher adoption, not an institutional ORCID membership or a Member API integration.
+    Not recorded as conformance: the rubric is reward-only and this is not evidence of the
+    institution operating or integrating anything.
+- standard: scim
+  status: not_found
+  detail: No SCIM endpoint or provisioning documentation found on any chula.ac.th host.
+- standard: lti
+  status: not_found
+  detail: >-
+    lms.chula.ac.th resolves and answers, but every request from outside the campus network
+    is intercepted by an Imperva bot challenge (HTTP 200, 212-byte Incapsula body), so no
+    LTI advertisement could be read either way. Recorded as not found, not as absent.
+- standard: oneroster
+  status: not_found
+  detail: >-
+    The registrar's own course API (cas.reg.chula.ac.th/class/api) is an ad-hoc JSON
+    contract with no OneRoster vocabulary, endpoints or media types.
+- standard: ed-fi
+  status: not_found
+- standard: caliper
+  status: not_found
+- standard: qti
+  status: not_found

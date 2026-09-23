@@ -1,0 +1,72 @@
+openapi: 3.2.0
+info:
+  title: CU-REG Course Schedule Meta API
+  version: 2026.8.21-1644-1a51328
+  description: The read-only JSON API behind CU-REG Course Schedule, the public course, curriculum and class-timetable browser operated by the Office of the Registrar, Chulalongkorn University, at https://cas.reg.chula.ac.th/class/course-schedule.
+  contact:
+    name: Office of the Registrar, Chulalongkorn University
+    url: https://www.reg.chula.ac.th/
+  x-provenance:
+    generated: '2026-09-01'
+    method: probed
+    source: https://cas.reg.chula.ac.th/class/api/
+    authored_by: API Evangelist
+    note: Endpoint names read from the application bundle at https://cas.reg.chula.ac.th/class/main-STPCQOCS.js (HTTP 200), then each one fetched. Schemas below are inferred from the 50-record response body actually returned by GET /class/api/course-studies (HTTP 200, 43,377 bytes), archived at examples/chulalongkorn-course-studies-example.json.
+servers:
+- url: https://cas.reg.chula.ac.th/class/api
+  description: Production CU-REG Course Schedule backend
+tags:
+- name: Meta
+  description: Service metadata
+paths:
+  /version:
+    get:
+      tags:
+      - Meta
+      operationId: getVersion
+      summary: Deployed build version of the course schedule service
+      responses:
+        '200':
+          description: Build identifier.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    description: Build stamp, formatted YYYY.M.D-HHMM-<commit>.
+                required:
+                - version
+              example:
+                version: 2026.8.21-1644-1a51328
+x-client-declared-endpoints:
+  note: Declared by the Angular client against the same base URL and observed returning HTTP 404 to an unauthenticated external request on 2026-09-01. Listed so the gap is recorded, not so it can be mistaken for a documented contract.
+  probed: '2026-09-01'
+  endpoints:
+  - path: /course
+    status: 404
+  - path: /course-detail
+    status: 404
+  - path: /course-header
+    status: 404
+  - path: /course-group
+    status: 404
+  - path: /course-group-detail
+    status: 404
+  - path: /course-description
+    status: 404
+  - path: /class-day
+    status: 404
+  - path: /class-time
+    status: 404
+  - path: /exam-date
+    status: 404
+  - path: /faculty
+    status: 404
+  - path: /general-education
+    status: 404
+  - path: /instructor
+    status: 404
+  - path: /year-semester
+    status: 404

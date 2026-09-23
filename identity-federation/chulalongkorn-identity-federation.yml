@@ -1,0 +1,91 @@
+specification: API Evangelist Identity Federation
+specificationVersion: '0.1'
+provider: Chulalongkorn University
+providerId: chulalongkorn
+generated: '2026-09-01'
+method: probed
+source: >-
+  https://login.microsoftonline.com/chula.ac.th/v2.0/.well-known/openid-configuration
+  (HTTP 200, 1,964 bytes),
+  https://login.microsoftonline.com/271d5e7b-1350-4b96-ab84-52dbda4cf40c/federationmetadata/2007-06/federationmetadata.xml
+  (HTTP 200, 28,441 bytes, archived locally as chulalongkorn-entra-saml-metadata.xml),
+  https://login.microsoftonline.com/getuserrealm.srf for chula.ac.th and
+  student.chula.ac.th, and the full eduGAIN entity list from
+  https://technical.edugain.org/api.php?action=list_entities (HTTP 200, 10,616 entities).
+description: >-
+  Chulalongkorn University's identity federation surface is a Microsoft Entra ID tenant,
+  not a Shibboleth identity provider. Tenant 271d5e7b-1350-4b96-ab84-52dbda4cf40c carries
+  the federation brand name "Chulalongkorn University" and is authoritative for both
+  chula.ac.th and student.chula.ac.th as a Managed namespace. Its OpenID Connect discovery
+  document and its SAML 2.0 federation metadata are both publicly resolvable and fully
+  machine-readable, which makes this the strongest machine-readable identity contract in
+  the profile.
+
+  Two negatives matter as much as the positive, and both were probed rather than assumed.
+  First, Chulalongkorn has NO entity in eduGAIN: a full pull of the eduGAIN technical
+  entity list on 2026-09-01 returned 10,616 entities and zero matching "chula". Thailand's
+  national research and education network does not interfederate its members through
+  eduGAIN, so the standard route for finding a university's Shibboleth IdP finds nothing
+  here. Second, the university's own campus SSO (account.it.chula.ac.th) is neither SAML
+  nor OIDC — it is a bespoke CAS 1.0 variant with an added application-authentication step,
+  recorded in the authentication artifact rather than here.
+
+  Operator note: the tenant is a deployment on Microsoft's infrastructure and the metadata
+  endpoints are Microsoft's. The identity data, the domains, the brand and the attribute
+  policy are the university's. It is recorded as x-operator federation, per the university
+  pipeline contract, which names an Entra ID tenant as a federation surface rather than a
+  vendor one.
+
+federation:
+  type: cloud_tenant
+  platform: Microsoft Entra ID
+  interfederation: none
+  edugain_member: false
+  edugain_probed: '2026-09-01'
+  edugain_entities_scanned: 10616
+  edugain_matches: 0
+  eduroam_cat_listed: false
+  eduroam_cat_probed: '2026-09-01'
+  eduroam_cat_note: >-
+    The eduroam CAT listAllIdentityProviders response (HTTP 200, 1,587,547 bytes) contains
+    no Chulalongkorn entry. Absence from CAT is not proof the institution lacks eduroam —
+    CAT lists institutions that publish a configuration profile through CAT specifically —
+    so this is recorded as a negative probe, not as a finding about the university.
+
+identity_provider:
+  name: Chulalongkorn University (Microsoft Entra ID)
+  x-operator: federation
+  tenant_id: 271d5e7b-1350-4b96-ab84-52dbda4cf40c
+  tenant_region_scope: AS
+  federation_brand_name: Chulalongkorn University
+  namespace_type: Managed
+  cloud_instance: microsoftonline.com
+  domains:
+  - chula.ac.th
+  - student.chula.ac.th
+  oidc:
+    issuer: https://login.microsoftonline.com/271d5e7b-1350-4b96-ab84-52dbda4cf40c/v2.0
+    discovery: https://login.microsoftonline.com/chula.ac.th/v2.0/.well-known/openid-configuration
+    jwks_uri: https://login.microsoftonline.com/271d5e7b-1350-4b96-ab84-52dbda4cf40c/discovery/v2.0/keys
+    probed: '2026-09-01'
+    status: 200
+    archived: identity-federation/chulalongkorn-entra-openid-configuration.json
+  saml:
+    entity_id: https://sts.windows.net/271d5e7b-1350-4b96-ab84-52dbda4cf40c/
+    metadata: https://login.microsoftonline.com/271d5e7b-1350-4b96-ab84-52dbda4cf40c/federationmetadata/2007-06/federationmetadata.xml
+    probed: '2026-09-01'
+    status: 200
+    archived: identity-federation/chulalongkorn-entra-saml-metadata.xml
+
+campus_sso:
+  name: Chula SSO
+  x-operator: institution
+  protocol: Modified CAS 1.0 with application authentication
+  host: https://account.it.chula.ac.th/
+  saml: false
+  oidc: false
+  note: >-
+    Documented at https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work (HTTP
+    200). Backed by the university LDAP directory. It is institution-engineered — the wiki
+    names the architect and the 2015 CU DataGateway project it came out of — but it is not
+    a federation protocol implementation and contributes no SAML or Shibboleth conformance.

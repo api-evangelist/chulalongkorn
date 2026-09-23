@@ -1,0 +1,41 @@
+{
+  "x-provenance": {
+    "generated": "2026-09-01",
+    "method": "derived",
+    "source": "https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work",
+    "source_status": 200,
+    "authored_by": "API Evangelist",
+    "note": "Reproduced verbatim from the success and failure response bodies printed in the university's own public servlet reference. Not captured from a live call — the endpoint requires an appid/appsecret pair issued by the university on request."
+  },
+  "success": {
+    "request": {
+      "method": "GET",
+      "url": "https://account.it.chula.ac.th/serviceValidation",
+      "headers": {
+        "DeeAppId": "<application id issued by the university>",
+        "DeeAppSecret": "<application secret issued by the university>",
+        "DeeTicket": "<service ticket from the /login redirect>"
+      }
+    },
+    "response": {
+      "status": 200,
+      "body": {
+        "uid": "0001",
+        "username": "demo",
+        "gecos": "Demo Account",
+        "email": "demo@example.com",
+        "roles": ["faculty", "student"],
+        "ouid": "{employeeid or studentid}"
+      }
+    }
+  },
+  "failure": {
+    "response": {
+      "status": 401,
+      "body": {
+        "type": "error",
+        "content": "invalid ticket/permission"
+      }
+    }
+  }
+}

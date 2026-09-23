@@ -1,0 +1,31 @@
+{
+  "provider": "chulalongkorn",
+  "sources": [
+    "_original/chulalongkorn-course-schedule-openapi.yml",
+    "_original/chulalongkorn-sso-openapi.yml"
+  ],
+  "outputs": [
+    "chulalongkorn-curriculum-api-openapi.yml",
+    "chulalongkorn-meta-api-openapi.yml",
+    "chulalongkorn-authentication-api-openapi.yml",
+    "chulalongkorn-validation-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "2 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "chulalongkorn-course-schedule-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "chulalongkorn-sso-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/chulalongkorn-sso-openapi_2.yml: archived document superseded by a larger archived document",
+    "_original/chulalongkorn-course-schedule-openapi_2.yml: archived document superseded by a larger archived document",
+    "chulalongkorn-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chulalongkorn-curriculum-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chulalongkorn-meta-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "chulalongkorn-validation-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

@@ -1,0 +1,171 @@
+openapi: 3.0.3
+info:
+  title: CU-REG Course Schedule API
+  version: '2026.8.21-1644-1a51328'
+  description: >-
+    The read-only JSON API behind CU-REG Course Schedule, the public course, curriculum and
+    class-timetable browser operated by the Office of the Registrar, Chulalongkorn
+    University, at https://cas.reg.chula.ac.th/class/course-schedule. The browser is an
+    Angular single-page application; this document describes the backend it calls, which is
+    served from the same origin under /class/api and requires no credentials.
+
+    THIS DOCUMENT WAS NOT PUBLISHED BY CHULALONGKORN UNIVERSITY. It is an API Evangelist
+    reconstruction, and its scope is deliberately narrow: only operations that were fetched
+    and returned HTTP 200 on 2026-09-01 are described as paths. The application's own bundle
+    (main-STPCQOCS.js) declares a further thirteen endpoint names against the same base;
+    every one of them returned HTTP 404 to an unauthenticated request from outside the
+    campus network on that date, so they are recorded under x-client-declared-endpoints as
+    observations rather than promoted to paths we cannot demonstrate.
+  contact:
+    name: Office of the Registrar, Chulalongkorn University
+    url: https://www.reg.chula.ac.th/
+  x-provenance:
+    generated: '2026-09-01'
+    method: probed
+    source: https://cas.reg.chula.ac.th/class/api/
+    authored_by: API Evangelist
+    note: >-
+      Endpoint names read from the application bundle at
+      https://cas.reg.chula.ac.th/class/main-STPCQOCS.js (HTTP 200), then each one fetched.
+      Schemas below are inferred from the 50-record response body actually returned by
+      GET /class/api/course-studies (HTTP 200, 43,377 bytes), archived at
+      examples/chulalongkorn-course-studies-example.json.
+servers:
+  - url: https://cas.reg.chula.ac.th/class/api
+    description: Production CU-REG Course Schedule backend
+tags:
+  - name: Curriculum
+    description: Degree programs and fields of study
+  - name: Meta
+    description: Service metadata
+paths:
+  /version:
+    get:
+      tags: [ Meta ]
+      operationId: getVersion
+      summary: Deployed build version of the course schedule service
+      responses:
+        '200':
+          description: Build identifier.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    description: Build stamp, formatted YYYY.M.D-HHMM-<commit>.
+                required: [ version ]
+              example:
+                version: 2026.8.21-1644-1a51328
+  /course-studies:
+    get:
+      tags: [ Curriculum ]
+      operationId: listCourseStudies
+      summary: List degree programs and fields of study
+      description: >-
+        Returns the registrar's curriculum register: each degree program with its degree
+        and major names in Thai and English, credit total, nominal and maximum years of
+        study, and the academic-year/semester window in which the program is offered.
+        Verified live and unauthenticated; the response observed on 2026-09-01 carried 50
+        records with no pagination envelope.
+      parameters:
+        - name: lang
+          in: query
+          required: false
+          schema: { type: string, enum: [ en, th ] }
+          description: >-
+            Language hint sent by the client. Accepted; the observed response returns both
+            the Thai and the English name fields regardless of its value.
+      responses:
+        '200':
+          description: Curriculum register.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/CourseStudy' }
+                required: [ data ]
+        '404':
+          description: >-
+            Returned by this service for an unmatched route, as an Express HTML error page
+            rather than JSON. The client treats a 404 as an empty result set.
+          content:
+            text/html:
+              schema: { type: string }
+components:
+  schemas:
+    CourseStudy:
+      type: object
+      description: One degree program / field of study in the registrar's curriculum register.
+      properties:
+        id: { type: string, description: Program identifier. }
+        programsystem: { type: string }
+        studyprogramsystem: { type: string, description: Study program system code, e.g. S. }
+        calendar: { type: string, description: Academic calendar code. }
+        coursecodeno: { type: string }
+        degree: { type: string, description: Degree code. }
+        majorcode: { type: string, description: Major code. }
+        noyearstudy: { type: string, description: Nominal years of study. }
+        minperiodstudy: { type: integer }
+        maxperiodstudy: { type: integer }
+        credittotal: { type: integer, description: Total credits required. }
+        plan1: { type: string, nullable: true, description: Plan designation, in Thai. }
+        language1: { type: string, nullable: true }
+        beginyear: { type: string, description: First academic year offered (Buddhist or Gregorian as stored). }
+        beginsemester: { type: string }
+        lastyear: { type: string }
+        lastsemester: { type: string }
+        stopyear: { type: string, description: Last academic year offered; 9999 where open-ended. }
+        stopsemester: { type: string }
+        international:
+          type: object
+          nullable: true
+          description: >-
+            International-program flag. Serialized by the backend as a raw Node.js Buffer
+            rather than a boolean — {"type":"Buffer","data":[48]} for "0". Recorded as
+            observed; this is a leak of the storage layer into the contract, not a designed
+            representation.
+          properties:
+            type: { type: string, example: Buffer }
+            data:
+              type: array
+              items: { type: integer }
+        status: { type: string, nullable: true }
+        conferanceno: { type: string, nullable: true }
+        conferancedate: { type: string, nullable: true }
+        effectivedate: { type: string, nullable: true }
+        expiredate: { type: string, nullable: true }
+        user_id: { type: string, nullable: true }
+        updatedate: { type: string, nullable: true }
+        created_date: { type: string, nullable: true }
+        changestamp: { type: string, nullable: true }
+        currid: { type: string, nullable: true }
+        degree_thai: { type: string }
+        degree_english: { type: string }
+        major_thai: { type: string }
+        major_english: { type: string }
+      required: [ id, degree_thai, degree_english, major_thai, major_english ]
+x-client-declared-endpoints:
+  note: >-
+    Declared by the Angular client against the same base URL and observed returning HTTP 404
+    to an unauthenticated external request on 2026-09-01. Listed so the gap is recorded, not
+    so it can be mistaken for a documented contract.
+  probed: '2026-09-01'
+  endpoints:
+    - { path: /course, status: 404 }
+    - { path: /course-detail, status: 404 }
+    - { path: /course-header, status: 404 }
+    - { path: /course-group, status: 404 }
+    - { path: /course-group-detail, status: 404 }
+    - { path: /course-description, status: 404 }
+    - { path: /class-day, status: 404 }
+    - { path: /class-time, status: 404 }
+    - { path: /exam-date, status: 404 }
+    - { path: /faculty, status: 404 }
+    - { path: /general-education, status: 404 }
+    - { path: /instructor, status: 404 }
+    - { path: /year-semester, status: 404 }

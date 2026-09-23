@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/chulalongkorn/refs/heads/main/json-schema/chulalongkorn-course-study-schema.json",
+  "title": "CU-REG Course Study (Degree Program)",
+  "description": "One degree program / field of study as returned in the data[] array of GET https://cas.reg.chula.ac.th/class/api/course-studies, the Chulalongkorn University Office of the Registrar curriculum register.",
+  "x-provenance": {
+    "generated": "2026-09-01",
+    "method": "probed",
+    "source": "https://cas.reg.chula.ac.th/class/api/course-studies",
+    "source_status": 200,
+    "authored_by": "API Evangelist",
+    "note": "Inferred from all 50 records of the live response on 2026-09-01. Nullability reflects values actually observed across those records. The institution publishes no JSON Schema."
+  },
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Program identifier."
+    },
+    "programsystem": {
+      "type": "string",
+      "description": "Program system code."
+    },
+    "studyprogramsystem": {
+      "type": "string",
+      "description": "Study program system code, e.g. S."
+    },
+    "calendar": {
+      "type": "string",
+      "description": "Academic calendar code."
+    },
+    "coursecodeno": {
+      "type": "string",
+      "description": "Course code number."
+    },
+    "degree": {
+      "type": "string",
+      "description": "Degree code."
+    },
+    "majorcode": {
+      "type": "string",
+      "description": "Major code."
+    },
+    "noyearstudy": {
+      "type": "string",
+      "description": "Nominal years of study, as a decimal string."
+    },
+    "minperiodstudy": {
+      "type": "integer",
+      "description": "Minimum study periods."
+    },
+    "maxperiodstudy": {
+      "type": "integer",
+      "description": "Maximum study periods."
+    },
+    "credittotal": {
+      "type": "integer",
+      "description": "Total credits required."
+    },
+    "plan1": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Plan designation, in Thai."
+    },
+    "language1": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Language of instruction code."
+    },
+    "beginyear": {
+      "type": "string",
+      "description": "First academic year offered."
+    },
+    "beginsemester": {
+      "type": "string",
+      "description": "First semester offered."
+    },
+    "lastyear": {
+      "type": "string",
+      "description": "Last academic year recorded."
+    },
+    "lastsemester": {
+      "type": "string",
+      "description": "Last semester recorded."
+    },
+    "stopyear": {
+      "type": "string",
+      "description": "Academic year the program stops; 9999 where open-ended."
+    },
+    "stopsemester": {
+      "type": "string",
+      "description": "Semester the program stops."
+    },
+    "international": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "International-program flag. Serialized by the backend as a raw Node.js Buffer rather than a boolean - {\"type\":\"Buffer\",\"data\":[91,48,93]}. Recorded as observed; this is the storage layer leaking into the contract, not a designed representation.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "Buffer"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Program status flag."
+    },
+    "conferanceno": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Conferral reference number."
+    },
+    "conferancedate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Conferral date."
+    },
+    "effectivedate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Effective date."
+    },
+    "expiredate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Expiry date."
+    },
+    "user_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Last editing user id."
+    },
+    "updatedate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Last update timestamp."
+    },
+    "created_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Creation timestamp."
+    },
+    "changestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Change stamp."
+    },
+    "currid": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Curriculum identifier."
+    },
+    "degree_thai": {
+      "type": "string",
+      "description": "Degree name, Thai."
+    },
+    "degree_english": {
+      "type": "string",
+      "description": "Degree name, English."
+    },
+    "major_thai": {
+      "type": "string",
+      "description": "Major / field of study, Thai."
+    },
+    "major_english": {
+      "type": "string",
+      "description": "Major / field of study, English."
+    }
+  },
+  "required": [
+    "id",
+    "degree_thai",
+    "degree_english",
+    "major_thai",
+    "major_english"
+  ],
+  "additionalProperties": true
+}

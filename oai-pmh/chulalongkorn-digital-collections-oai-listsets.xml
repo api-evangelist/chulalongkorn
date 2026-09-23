@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH
+	xmlns="http://www.openarchives.org/OAI/2.0/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/
+		http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+	<responseDate>2026-09-01T20:43:45Z</responseDate>
+	<request verb="ListSets">http://digital.car.chula.ac.th/do/oai/</request>
+	
+	<ListSets>
+
+<set>
+	<setSpec>publication:aer</setSpec>
+	<setName>Applied Environmental Research</setName>
+</set>
+<set>
+	<setSpec>publication:arj</setSpec>
+	<setName>วารสารวิทยบริการ Academic Resources Journal</setName>
+</set>
+<set>
+	<setSpec>publication:arv</setSpec>
+	<setName>Asian Review</setName>
+</set>
+<set>
+	<setSpec>publication:chulaetd</setSpec>
+	<setName>Chulalongkorn University Theses and Dissertations (Chula ETD)</setName>
+</set>
+<set>
+	<setSpec>publication:clmjournal</setSpec>
+	<setName>Chulalongkorn Medical Journal</setName>
+</set>
+<set>
+	<setSpec>publication:cudj</setSpec>
+	<setName>Chulalongkorn University Dental Journal</setName>
+</set>
+<set>
+	<setSpec>publication:cuej</setSpec>
+	<setName>Thai Environment</setName>
+</set>
+<set>
+	<setSpec>publication:cujo</setSpec>
+	<setName>Chulalongkorn Journal Online (CUJO)</setName>
+</set>
+<set>
+	<setSpec>publication:cujss</setSpec>
+	<setName>Journal of Social Sciences</setName>
+</set>
+<set>
+	<setSpec>publication:culj</setSpec>
+	<setName>Chulalongkorn University Law Journal</setName>
+</set>
+<set>
+	<setSpec>publication:cuns</setSpec>
+	<setName>Journal of Nursing Research, Innovation, and Health</setName>
+</set>
+<set>
+	<setSpec>publication:educujournal</setSpec>
+	<setName>Journal of Education Studies</setName>
+</set>
+<set>
+	<setSpec>publication:e-lectures</setSpec>
+	<setName>Chula E-Lectures</setName>
+</set>
+<set>
+	<setSpec>publication:ent10</setSpec>
+	<setName>The 10th Engagement Thailand Annual Conference 2026</setName>
+</set>
+<set>
+	<setSpec>publication:halalinsight</setSpec>
+	<setName>Halal Insight</setName>
+</set>
+<set>
+	<setSpec>publication:jamjuree</setSpec>
+	<setName>Jamjuree Journal</setName>
+</set>
+<set>
+	<setSpec>publication:jdm</setSpec>
+	<setName>Journal of Demography</setName>
+</set>
+<set>
+	<setSpec>publication:jhr</setSpec>
+	<setName>Journal of Health Research</setName>
+</set>
+<set>
+	<setSpec>publication:jletters</setSpec>
+	<setName>Journal of Letters</setName>
+</set>
+<set>
+	<setSpec>publication:jmmm</setSpec>
+	<setName>Journal of Metals, Materials and Minerals</setName>
+</set>
+<set>
+	<setSpec>publication:jucr</setSpec>
+	<setName>Journal of Urban Culture Research</setName>
+</set>
+<set>
+	<setSpec>publication:lsj</setSpec>
+	<setName>วารสารบรรณารักษศาสตร์ (Library Science Journal)</setName>
+</set>
+<set>
+	<setSpec>publication:manusya</setSpec>
+	<setName>Manusya, Journal of Humanities</setName>
+</set>
+<set>
+	<setSpec>publication:nakhara</setSpec>
+	<setName>NAKHARA (Journal of Environmental Design and Planning)</setName>
+</set>
+<set>
+	<setSpec>publication:pasaa</setSpec>
+	<setName>PASAA</setName>
+</set>
+<set>
+	<setSpec>publication:tjps</setSpec>
+	<setName>The Thai Journal of Pharmaceutical Sciences</setName>
+</set>
+<set>
+	<setSpec>publication:tjvm</setSpec>
+	<setName>The Thai Journal of Veterinary Medicine</setName>
+</set>
+<set>
+	<setSpec>publication:tnh</setSpec>
+	<setName>Tropical Natural History</setName>
+</set>
+<set>
+	<setSpec>publication:translog</setSpec>
+	<setName>Journal of Transportation and Logistics (TRANSLOG)</setName>
+</set>
+<set>
+	<setSpec>publication:unisearch</setSpec>
+	<setName>UNISEARCH (Unisearch Journal)</setName>
+</set>	</ListSets>
+</OAI-PMH>

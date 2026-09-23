@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/chulalongkorn/refs/heads/main/json-schema/chulalongkorn-sso-user-schema.json",
+  "title": "Chula SSO Authenticated User",
+  "description": "The user object returned by GET/POST /serviceValidation on the Chula SSO service at account.it.chula.ac.th when a service ticket validates.",
+  "x-provenance": {
+    "generated": "2026-09-01",
+    "method": "derived",
+    "source": "https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work",
+    "source_status": 200,
+    "authored_by": "API Evangelist",
+    "note": "Derived from the JSON response body printed in the institution's own public servlet reference. The institution publishes no JSON Schema."
+  },
+  "type": "object",
+  "properties": {
+    "uid": { "type": "string", "description": "Internal SSO user identifier." },
+    "username": { "type": "string", "description": "Chula ID username." },
+    "gecos": { "type": "string", "description": "Display name, carried through from the university LDAP directory." },
+    "email": { "type": "string", "format": "email" },
+    "roles": {
+      "type": "array",
+      "description": "Directory roles, e.g. faculty, student.",
+      "items": { "type": "string" }
+    },
+    "ouid": { "type": "string", "description": "Employee ID or student ID." }
+  },
+  "required": ["uid", "username", "email"],
+  "additionalProperties": true
+}

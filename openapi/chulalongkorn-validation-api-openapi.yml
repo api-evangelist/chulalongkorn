@@ -1,0 +1,119 @@
+openapi: 3.2.0
+info:
+  title: Chula SSO Authentication Validation API
+  version: '2017.01'
+  description: Single sign-on authentication service operated by Chulalongkorn University at account.it.chula.ac.th, in production since January 2017.
+  contact:
+    name: Office of Information Technology, Chulalongkorn University
+    url: https://www.it.chula.ac.th/
+  termsOfService: https://account.it.chula.ac.th/wiki/doku.php
+  x-provenance:
+    generated: '2026-09-01'
+    method: derived
+    source: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
+    source_status: 200
+    authored_by: API Evangelist
+    note: Derived from the institution's published prose documentation. The institution does not publish a machine-readable contract for this service.
+servers:
+- url: https://account.it.chula.ac.th
+  description: Production Chula SSO
+tags:
+- name: Validation
+  description: Ticket validation for relying applications
+paths:
+  /serviceValidation:
+    get:
+      tags:
+      - Validation
+      operationId: serviceValidation
+      summary: Validate a service ticket and retrieve the authenticated user
+      description: Relying applications exchange a ticket for the authenticated user's identity. The application authenticates itself with the DeeAppId and DeeAppSecret headers, which are issued on request by the university and are not self-service.
+      parameters:
+      - name: DeeAppId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Application identifier issued by the university.
+      - name: DeeAppSecret
+        in: header
+        required: true
+        schema:
+          type: string
+          format: password
+        description: Application secret issued by the university.
+      - name: DeeTicket
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Ticket to validate.
+      responses:
+        '200':
+          description: Ticket valid. Body is the authenticated user object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSOUser'
+              example:
+                uid: '0001'
+                username: demo
+                gecos: Demo Account
+                email: demo@example.com
+                roles:
+                - faculty
+                - student
+                ouid: '6031234521'
+        '401':
+          description: Invalid ticket or the application is not permitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSOError'
+              example:
+                type: error
+                content: invalid ticket/permission
+components:
+  schemas:
+    SSOError:
+      type: object
+      properties:
+        type:
+          type: string
+          example: error
+        content:
+          type: string
+          example: invalid ticket/permission
+    SSOUser:
+      type: object
+      description: Authenticated Chula ID, as returned by /serviceValidation on success.
+      properties:
+        uid:
+          type: string
+          description: Internal SSO user identifier.
+        username:
+          type: string
+          description: Chula ID username.
+        gecos:
+          type: string
+          description: Display name, carried through from the university LDAP directory.
+        email:
+          type: string
+          format: email
+        roles:
+          type: array
+          description: Directory roles, e.g. faculty, student.
+          items:
+            type: string
+        ouid:
+          type: string
+          description: Employee ID or student ID.
+  securitySchemes:
+    DeeAppId:
+      type: apiKey
+      in: header
+      name: DeeAppId
+    DeeAppSecret:
+      type: apiKey
+      in: header
+      name: DeeAppSecret

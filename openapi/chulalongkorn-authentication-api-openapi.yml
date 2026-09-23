@@ -1,0 +1,103 @@
+openapi: 3.2.0
+info:
+  title: Chula SSO Authentication API
+  version: '2017.01'
+  description: Single sign-on authentication service operated by Chulalongkorn University at account.it.chula.ac.th, in production since January 2017.
+  contact:
+    name: Office of Information Technology, Chulalongkorn University
+    url: https://www.it.chula.ac.th/
+  termsOfService: https://account.it.chula.ac.th/wiki/doku.php
+  x-provenance:
+    generated: '2026-09-01'
+    method: derived
+    source: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
+    source_status: 200
+    authored_by: API Evangelist
+    note: Derived from the institution's published prose documentation. The institution does not publish a machine-readable contract for this service.
+servers:
+- url: https://account.it.chula.ac.th
+  description: Production Chula SSO
+tags:
+- name: Authentication
+  description: Session establishment and teardown
+paths:
+  /login:
+    get:
+      tags:
+      - Authentication
+      operationId: login
+      summary: Establish an SSO session and issue a service ticket
+      description: Validates credentials and generates a ticket-granting session. Without a valid session the service issues a 302 to /html/login.html carrying the service parameter; with a valid session it issues a 302 back to the service URL carrying a ticket parameter.
+      parameters:
+      - name: service
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uri
+        description: URL to redirect to after successful authentication.
+      - name: username
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Username, in email form.
+      - name: password
+        in: query
+        required: false
+        schema:
+          type: string
+          format: password
+      - name: remember
+        in: query
+        required: false
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+        description: Any non-zero value makes the session non-expiring.
+      responses:
+        '302':
+          description: Redirect. To /html/login.html with the service parameter when there is no valid session; to the service URL with a ticket parameter when there is.
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+    post:
+      tags:
+      - Authentication
+      operationId: loginPost
+      summary: Establish an SSO session (form POST)
+      description: Same contract as GET /login; the documentation states GET/POST.
+      responses:
+        '302':
+          description: Redirect, as for GET /login.
+  /logout:
+    get:
+      tags:
+      - Authentication
+      operationId: logout
+      summary: Terminate the SSO session
+      parameters:
+      - name: service
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uri
+        description: URL to redirect to after logout. Defaults to /html/logout.html.
+      responses:
+        '302':
+          description: Redirect to the service URL.
+components:
+  securitySchemes:
+    DeeAppId:
+      type: apiKey
+      in: header
+      name: DeeAppId
+    DeeAppSecret:
+      type: apiKey
+      in: header
+      name: DeeAppSecret
