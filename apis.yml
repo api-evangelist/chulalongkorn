@@ -26,16 +26,20 @@ description: >-
 type: Index
 deliveryModel:
   model: saas
-  open_source: false
-  commercial: false
+  license_evidence:
+    not_product:
+    - krerk/chulasso.android
+  open_source: unknown
+  commercial: true
   callable_host: true
   label: Hosted service · you call their endpoint
-  confidence: medium
+  confidence: low
   source:
-  - probe
-  - documentation
-  generated: '2026-09-01'
-  method: probed
+  - openapi
+  - pricing
+  - repository-not-product
+  generated: '2026-09-25'
+  method: derived
 accessModel:
   pricing: free
   onboarding: manual
