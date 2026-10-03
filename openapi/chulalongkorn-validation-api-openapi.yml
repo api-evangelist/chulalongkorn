@@ -75,6 +75,15 @@ paths:
                 content: invalid ticket/permission
 components:
   schemas:
+    SSOError:
+      type: object
+      properties:
+        type:
+          type: string
+          example: error
+        content:
+          type: string
+          example: invalid ticket/permission
     SSOUser:
       type: object
       description: Authenticated Chula ID, as returned by /serviceValidation on success.
@@ -99,15 +108,6 @@ components:
         ouid:
           type: string
           description: Employee ID or student ID.
-    SSOError:
-      type: object
-      properties:
-        type:
-          type: string
-          example: error
-        content:
-          type: string
-          example: invalid ticket/permission
   securitySchemes:
     DeeAppId:
       type: apiKey
