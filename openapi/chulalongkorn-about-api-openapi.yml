@@ -1,0 +1,25 @@
+openapi: 3.2.0
+info:
+  title: ChulaSSO Service About API
+  description: Service for ChulaSSO, CopyRight © 2022-present Krerk Piromsopa,Ph.D.
+  version: '2.0'
+tags:
+- name: About
+paths:
+  /about:
+    get:
+      summary: About
+      description: Return application information in a JSON to the frontend.
+      operationId: about_about_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+                title: Response About About Get
+      tags:
+      - About

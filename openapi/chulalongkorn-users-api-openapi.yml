@@ -1,0 +1,146 @@
+openapi: 3.2.0
+info:
+  title: ChulaSSO Service Users API
+  description: Service for ChulaSSO, CopyRight © 2022-present Krerk Piromsopa,Ph.D.
+  version: '2.0'
+tags:
+- name: Users
+paths:
+  /api/auth/json:
+    post:
+      tags:
+      - Users
+      summary: Post Auth Json
+      operationId: post_auth_json_api_auth_json_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthInput'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/auth/logout:
+    post:
+      tags:
+      - Users
+      summary: Post Logout
+      operationId: post_logout_api_auth_logout_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/users/me:
+    get:
+      tags:
+      - Users
+      summary: Get Me
+      description: 'GET info. of active user
+
+
+        :param user_session: cookies
+
+        :return: User'
+      operationId: get_me_api_users_me_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Get Me Api Users Me Get
+  /api/users/me/preferences:
+    put:
+      tags:
+      - Users
+      summary: Put My Preferences
+      operationId: put_my_preferences_api_users_me_preferences_put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreferencesIn'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Put My Preferences Api Users Me Preferences Put
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AuthInput:
+      properties:
+        username:
+          type: string
+          title: Username
+        password:
+          type: string
+          title: Password
+        remember:
+          type: boolean
+          title: Remember
+          default: false
+      type: object
+      required:
+      - username
+      - password
+      title: AuthInput
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PreferencesIn:
+      properties:
+        theme:
+          type: string
+          title: Theme
+      type: object
+      title: PreferencesIn
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

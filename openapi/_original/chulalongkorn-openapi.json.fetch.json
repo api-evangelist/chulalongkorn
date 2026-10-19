@@ -1,0 +1,12 @@
+{
+ "url": "https://account.it.chula.ac.th/openapi.json",
+ "final": "https://account.it.chula.ac.th/openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 25673,
+ "sha256": "9919221d006e888184eaaba0cb09a45b9932bf7e3edcc396e6fb43bd5c92af8b",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "re-archived: the provider's current document replaced a stale archive (roadmap#793); the old files are in openapi/_superseded/2026-10-19-stale"
+}

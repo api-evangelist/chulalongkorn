@@ -1,0 +1,77 @@
+openapi: 3.2.0
+info:
+  title: ChulaSSO Service Tickets API
+  description: Service for ChulaSSO, CopyRight © 2022-present Krerk Piromsopa,Ph.D.
+  version: '2.0'
+tags:
+- name: Tickets
+paths:
+  /api/tickets/grantTicket:
+    post:
+      tags:
+      - Tickets
+      summary: Post Grant Ticket
+      operationId: post_grant_ticket_api_tickets_grantTicket_post
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: Sso Requestservice
+        name: SSO_requestService
+        in: cookie
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/tickets/:
+    get:
+      tags:
+      - Tickets
+      summary: Get Tickets
+      operationId: get_tickets_api_tickets__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

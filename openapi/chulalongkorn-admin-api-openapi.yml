@@ -1,0 +1,467 @@
+openapi: 3.2.0
+info:
+  title: ChulaSSO Service Admin API
+  description: Service for ChulaSSO, CopyRight © 2022-present Krerk Piromsopa,Ph.D.
+  version: '2.0'
+tags:
+- name: Admin
+paths:
+  /api/admin/myapps/:
+    get:
+      tags:
+      - Admin
+      summary: List Requests
+      operationId: list_requests_api_admin_myapps__get
+      parameters:
+      - required: false
+        schema:
+          type: string
+          title: Status
+        name: status
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/MyAppPublic'
+                type: array
+                title: Response List Requests Api Admin Myapps  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/admin/myapps/{app_id}:
+    get:
+      tags:
+      - Admin
+      summary: Get Request
+      operationId: get_request_api_admin_myapps__app_id__get
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: App Id
+        name: app_id
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyAppPublic'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/admin/myapps/{app_id}/approve:
+    post:
+      tags:
+      - Admin
+      summary: Approve Request
+      operationId: approve_request_api_admin_myapps__app_id__approve_post
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: App Id
+        name: app_id
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyAppPublic'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/admin/myapps/{app_id}/reject:
+    post:
+      tags:
+      - Admin
+      summary: Reject Request
+      operationId: reject_request_api_admin_myapps__app_id__reject_post
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: App Id
+        name: app_id
+        in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RejectIn'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyAppPublic'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/admin/users/search:
+    get:
+      tags:
+      - Admin
+      summary: Search Users
+      description: Substring search over username, email and Thai/English names. Admin only.
+      operationId: search_users_api_admin_users_search_get
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: Q
+        name: q
+        in: query
+      - required: false
+        schema:
+          type: integer
+          title: Limit
+          default: 50
+        name: limit
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                type: array
+                title: Response Search Users Api Admin Users Search Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/admin/users/{username}/info:
+    get:
+      tags:
+      - Admin
+      summary: Get User Info
+      description: Full profile (minus the password hash) plus 2FA and session state. Admin only.
+      operationId: get_user_info_api_admin_users__username__info_get
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: Username
+        name: username
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Get User Info Api Admin Users  Username  Info Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/admin/users/delegates:
+    get:
+      tags:
+      - Admin
+      summary: List Delegates
+      description: Every user holding the TOTP_RESETTER bit.
+      operationId: list_delegates_api_admin_users_delegates_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                type: array
+                title: Response List Delegates Api Admin Users Delegates Get
+  /api/admin/users/{username}/delegate:
+    post:
+      tags:
+      - Admin
+      summary: Grant Delegate
+      operationId: grant_delegate_api_admin_users__username__delegate_post
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: Username
+        name: username
+        in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DelegateIn'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Grant Delegate Api Admin Users  Username  Delegate Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Admin
+      summary: Revoke Delegate
+      operationId: revoke_delegate_api_admin_users__username__delegate_delete
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: Username
+        name: username
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Revoke Delegate Api Admin Users  Username  Delegate Delete
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/admin/users/2fa-audit:
+    get:
+      tags:
+      - Admin
+      summary: List 2Fa Audit
+      description: Recent 2FA audit trail, most recent first. Admin only.
+      operationId: list_2fa_audit_api_admin_users_2fa_audit_get
+      parameters:
+      - required: false
+        schema:
+          type: string
+          title: Username
+        name: username
+        in: query
+      - required: false
+        schema:
+          type: string
+          title: Actor
+        name: actor
+        in: query
+      - required: false
+        schema:
+          type: integer
+          title: Limit
+          default: 100
+        name: limit
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                type: array
+                title: Response List 2Fa Audit Api Admin Users 2Fa Audit Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/admin/users/{username}/2fa-status:
+    get:
+      tags:
+      - Admin
+      summary: Get 2Fa Status
+      description: 'Enrollment summary for the confirm-before-reset step.
+
+
+        ``resettable``/``reason`` let the UI disable the button for targets the
+
+        caller may not touch, instead of failing at submit time.'
+      operationId: get_2fa_status_api_admin_users__username__2fa_status_get
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: Username
+        name: username
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Get 2Fa Status Api Admin Users  Username  2Fa Status Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/admin/users/{username}/reset-2fa:
+    post:
+      tags:
+      - Admin
+      summary: Reset 2Fa
+      operationId: reset_2fa_api_admin_users__username__reset_2fa_post
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: Username
+        name: username
+        in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reset2FAIn'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Reset 2Fa Api Admin Users  Username  Reset 2Fa Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    RejectIn:
+      properties:
+        reason:
+          type: string
+          title: Reason
+      type: object
+      required:
+      - reason
+      title: RejectIn
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    MyAppPublic:
+      properties:
+        app_id:
+          type: string
+          title: App Id
+        app_name:
+          type: string
+          title: App Name
+        app_icon:
+          type: string
+          title: App Icon
+        description:
+          type: string
+          title: Description
+        service_url:
+          type: string
+          title: Service Url
+        notes:
+          type: string
+          title: Notes
+        username:
+          type: string
+          title: Username
+        status:
+          type: string
+          title: Status
+        create_time:
+          type: string
+          format: date-time
+          title: Create Time
+        update_time:
+          type: string
+          format: date-time
+          title: Update Time
+        expire_time:
+          type: string
+          format: date-time
+          title: Expire Time
+      type: object
+      required:
+      - app_id
+      - status
+      title: MyAppPublic
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    DelegateIn:
+      properties:
+        note:
+          type: string
+          title: Note
+      type: object
+      title: DelegateIn
+    Reset2FAIn:
+      properties:
+        reason:
+          type: string
+          title: Reason
+      type: object
+      title: Reset2FAIn

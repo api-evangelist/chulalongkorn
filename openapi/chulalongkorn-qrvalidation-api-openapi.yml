@@ -1,0 +1,85 @@
+openapi: 3.2.0
+info:
+  title: ChulaSSO Service Qr Validation API
+  description: Service for ChulaSSO, CopyRight © 2022-present Krerk Piromsopa,Ph.D.
+  version: '2.0'
+tags:
+- name: QrValidation
+paths:
+  /qrValidation:
+    post:
+      summary: Post Qr Validation
+      description: 'Redeem a ChulaSSO QR token.
+
+
+        The app passes the raw QR text it scanned (BASE_URL/qr/).
+
+        Returns the same user-profile payload as /serviceValidation.
+
+        Each token is one-time-use and expires in 20 seconds.'
+      operationId: post_qr_validation_qrValidation_post
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: Deeappid
+        name: DeeAppId
+        in: header
+      - required: true
+        schema:
+          type: string
+          title: Deeappsecret
+        name: DeeAppSecret
+        in: header
+      - required: true
+        schema:
+          type: string
+          title: Deeqrtoken
+        name: DeeQrToken
+        in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - QrValidation
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

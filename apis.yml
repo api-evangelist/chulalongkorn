@@ -307,34 +307,6 @@ apis:
   x-operator-basis: >-
     datagateway.chula.ac.th → 161.200.135.7, Chulalongkorn's own address space. The service is described
     on the university's own IT service pages and is operated by the Office of Information Technology.
-- aid: chulalongkorn:chulalongkorn-authentication-api
-  name: Chulalongkorn University Authentication API
-  description: Session establishment and teardown
-  humanURL: https://account.it.chula.ac.th/wiki/doku.php
-  baseURL: https://account.it.chula.ac.th/
-  tags:
-  - Authentication
-  properties:
-  - type: OpenAPI
-    url: openapi/chulalongkorn-authentication-api-openapi.yml
-  - type: Documentation
-    url: https://account.it.chula.ac.th/wiki/doku.php
-  - type: APIReference
-    url: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
-  - type: JSONSchema
-    url: json-schema/chulalongkorn-sso-user-schema.json
-  - type: Examples
-    url: examples/chulalongkorn-sso-servicevalidation-example.json
-  - type: Authentication
-    url: authentication/chulalongkorn-authentication.yml
-  - type: SourceCode
-    url: https://github.com/krerk/ChulaSSO.Android
-  - type: CourseCatalog
-    url: https://cas.reg.chula.ac.th/class/course-schedule
-  - type: JSONSchema
-    url: json-schema/chulalongkorn-course-study-schema.json
-  - type: Examples
-    url: examples/chulalongkorn-course-studies-example.json
 - aid: chulalongkorn:chulalongkorn-curriculum-api
   name: Chulalongkorn University Curriculum API
   description: Degree programs and fields of study
@@ -391,16 +363,354 @@ apis:
     url: json-schema/chulalongkorn-course-study-schema.json
   - type: Examples
     url: examples/chulalongkorn-course-studies-example.json
-- aid: chulalongkorn:chulalongkorn-validation-api
-  name: Chulalongkorn University Validation API
-  description: Ticket validation for relying applications
-  humanURL: https://account.it.chula.ac.th/wiki/doku.php
-  baseURL: https://account.it.chula.ac.th/
+- aid: chulalongkorn:chulalongkorn-about-api
+  name: Chulalongkorn University About API
+  description: The About API from Chulalongkorn University — 1 operation(s) for about.
+  humanURL: https://digiverse.chula.ac.th/
+  baseURL: https://digital.car.chula.ac.th/do/oai/
   tags:
-  - Validation
+  - About
   properties:
   - type: OpenAPI
-    url: openapi/chulalongkorn-validation-api-openapi.yml
+    url: openapi/chulalongkorn-about-api-openapi.yml
+  - type: Documentation
+    url: https://account.it.chula.ac.th/wiki/doku.php
+  - type: APIReference
+    url: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-sso-user-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-sso-servicevalidation-example.json
+  - type: Authentication
+    url: authentication/chulalongkorn-authentication.yml
+  - type: SourceCode
+    url: https://github.com/krerk/ChulaSSO.Android
+  - type: CourseCatalog
+    url: https://cas.reg.chula.ac.th/class/course-schedule
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-course-study-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-course-studies-example.json
+- aid: chulalongkorn:chulalongkorn-admin-api
+  name: Chulalongkorn University Admin API
+  description: The admin API from Chulalongkorn University — 11 operation(s) for admin.
+  humanURL: https://digiverse.chula.ac.th/
+  baseURL: https://digital.car.chula.ac.th/do/oai/
+  tags:
+  - admin
+  properties:
+  - type: OpenAPI
+    url: openapi/chulalongkorn-admin-api-openapi.yml
+  - type: Documentation
+    url: https://account.it.chula.ac.th/wiki/doku.php
+  - type: APIReference
+    url: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-sso-user-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-sso-servicevalidation-example.json
+  - type: Authentication
+    url: authentication/chulalongkorn-authentication.yml
+  - type: SourceCode
+    url: https://github.com/krerk/ChulaSSO.Android
+  - type: CourseCatalog
+    url: https://cas.reg.chula.ac.th/class/course-schedule
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-course-study-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-course-studies-example.json
+- aid: chulalongkorn:chulalongkorn-chulasso-service-api
+  name: Chulalongkorn University ChulaSSO Service API
+  description: >-
+    The ChulaSSO Service API from Chulalongkorn University — 1 operation(s) for chulasso service.
+  humanURL: https://digiverse.chula.ac.th/
+  baseURL: https://digital.car.chula.ac.th/do/oai/
+  tags:
+  - ChulaSSO Service
+  properties:
+  - type: OpenAPI
+    url: openapi/chulalongkorn-chulasso-service-api-openapi.yml
+  - type: Documentation
+    url: https://account.it.chula.ac.th/wiki/doku.php
+  - type: APIReference
+    url: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-sso-user-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-sso-servicevalidation-example.json
+  - type: Authentication
+    url: authentication/chulalongkorn-authentication.yml
+  - type: SourceCode
+    url: https://github.com/krerk/ChulaSSO.Android
+  - type: CourseCatalog
+    url: https://cas.reg.chula.ac.th/class/course-schedule
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-course-study-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-course-studies-example.json
+- aid: chulalongkorn:chulalongkorn-html-api
+  name: Chulalongkorn University Html API
+  description: The Html API from Chulalongkorn University — 1 operation(s) for html.
+  humanURL: https://digiverse.chula.ac.th/
+  baseURL: https://digital.car.chula.ac.th/do/oai/
+  tags:
+  - Html
+  properties:
+  - type: OpenAPI
+    url: openapi/chulalongkorn-html-api-openapi.yml
+  - type: Documentation
+    url: https://account.it.chula.ac.th/wiki/doku.php
+  - type: APIReference
+    url: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-sso-user-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-sso-servicevalidation-example.json
+  - type: Authentication
+    url: authentication/chulalongkorn-authentication.yml
+  - type: SourceCode
+    url: https://github.com/krerk/ChulaSSO.Android
+  - type: CourseCatalog
+    url: https://cas.reg.chula.ac.th/class/course-schedule
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-course-study-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-course-studies-example.json
+- aid: chulalongkorn:chulalongkorn-login-api
+  name: Chulalongkorn University Login API
+  description: The Login API from Chulalongkorn University — 1 operation(s) for login.
+  humanURL: https://digiverse.chula.ac.th/
+  baseURL: https://digital.car.chula.ac.th/do/oai/
+  tags:
+  - Login
+  properties:
+  - type: OpenAPI
+    url: openapi/chulalongkorn-login-api-openapi.yml
+  - type: Documentation
+    url: https://account.it.chula.ac.th/wiki/doku.php
+  - type: APIReference
+    url: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-sso-user-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-sso-servicevalidation-example.json
+  - type: Authentication
+    url: authentication/chulalongkorn-authentication.yml
+  - type: SourceCode
+    url: https://github.com/krerk/ChulaSSO.Android
+  - type: CourseCatalog
+    url: https://cas.reg.chula.ac.th/class/course-schedule
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-course-study-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-course-studies-example.json
+- aid: chulalongkorn:chulalongkorn-logout-api
+  name: Chulalongkorn University Logout API
+  description: The Logout API from Chulalongkorn University — 1 operation(s) for logout.
+  humanURL: https://digiverse.chula.ac.th/
+  baseURL: https://digital.car.chula.ac.th/do/oai/
+  tags:
+  - Logout
+  properties:
+  - type: OpenAPI
+    url: openapi/chulalongkorn-logout-api-openapi.yml
+  - type: Documentation
+    url: https://account.it.chula.ac.th/wiki/doku.php
+  - type: APIReference
+    url: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-sso-user-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-sso-servicevalidation-example.json
+  - type: Authentication
+    url: authentication/chulalongkorn-authentication.yml
+  - type: SourceCode
+    url: https://github.com/krerk/ChulaSSO.Android
+  - type: CourseCatalog
+    url: https://cas.reg.chula.ac.th/class/course-schedule
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-course-study-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-course-studies-example.json
+- aid: chulalongkorn:chulalongkorn-myapps-api
+  name: Chulalongkorn University Myapps API
+  description: The myapps API from Chulalongkorn University — 3 operation(s) for myapps.
+  humanURL: https://digiverse.chula.ac.th/
+  baseURL: https://digital.car.chula.ac.th/do/oai/
+  tags:
+  - myapps
+  properties:
+  - type: OpenAPI
+    url: openapi/chulalongkorn-myapps-api-openapi.yml
+  - type: Documentation
+    url: https://account.it.chula.ac.th/wiki/doku.php
+  - type: APIReference
+    url: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-sso-user-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-sso-servicevalidation-example.json
+  - type: Authentication
+    url: authentication/chulalongkorn-authentication.yml
+  - type: SourceCode
+    url: https://github.com/krerk/ChulaSSO.Android
+  - type: CourseCatalog
+    url: https://cas.reg.chula.ac.th/class/course-schedule
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-course-study-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-course-studies-example.json
+- aid: chulalongkorn:chulalongkorn-qr-api
+  name: Chulalongkorn University Qr API
+  description: The qr API from Chulalongkorn University — 1 operation(s) for qr.
+  humanURL: https://digiverse.chula.ac.th/
+  baseURL: https://digital.car.chula.ac.th/do/oai/
+  tags:
+  - qr
+  properties:
+  - type: OpenAPI
+    url: openapi/chulalongkorn-qr-api-openapi.yml
+  - type: Documentation
+    url: https://account.it.chula.ac.th/wiki/doku.php
+  - type: APIReference
+    url: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-sso-user-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-sso-servicevalidation-example.json
+  - type: Authentication
+    url: authentication/chulalongkorn-authentication.yml
+  - type: SourceCode
+    url: https://github.com/krerk/ChulaSSO.Android
+  - type: CourseCatalog
+    url: https://cas.reg.chula.ac.th/class/course-schedule
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-course-study-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-course-studies-example.json
+- aid: chulalongkorn:chulalongkorn-qrvalidation-api
+  name: Chulalongkorn University Qr Validation API
+  description: The QrValidation API from Chulalongkorn University — 1 operation(s) for qrvalidation.
+  humanURL: https://digiverse.chula.ac.th/
+  baseURL: https://digital.car.chula.ac.th/do/oai/
+  tags:
+  - QrValidation
+  properties:
+  - type: OpenAPI
+    url: openapi/chulalongkorn-qrvalidation-api-openapi.yml
+  - type: Documentation
+    url: https://account.it.chula.ac.th/wiki/doku.php
+  - type: APIReference
+    url: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-sso-user-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-sso-servicevalidation-example.json
+  - type: Authentication
+    url: authentication/chulalongkorn-authentication.yml
+  - type: SourceCode
+    url: https://github.com/krerk/ChulaSSO.Android
+  - type: CourseCatalog
+    url: https://cas.reg.chula.ac.th/class/course-schedule
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-course-study-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-course-studies-example.json
+- aid: chulalongkorn:chulalongkorn-servicevalidation-api
+  name: Chulalongkorn University Service Validation API
+  description: >-
+    The ServiceValidation API from Chulalongkorn University — 1 operation(s) for servicevalidation.
+  humanURL: https://digiverse.chula.ac.th/
+  baseURL: https://digital.car.chula.ac.th/do/oai/
+  tags:
+  - ServiceValidation
+  properties:
+  - type: OpenAPI
+    url: openapi/chulalongkorn-servicevalidation-api-openapi.yml
+  - type: Documentation
+    url: https://account.it.chula.ac.th/wiki/doku.php
+  - type: APIReference
+    url: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-sso-user-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-sso-servicevalidation-example.json
+  - type: Authentication
+    url: authentication/chulalongkorn-authentication.yml
+  - type: SourceCode
+    url: https://github.com/krerk/ChulaSSO.Android
+  - type: CourseCatalog
+    url: https://cas.reg.chula.ac.th/class/course-schedule
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-course-study-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-course-studies-example.json
+- aid: chulalongkorn:chulalongkorn-tickets-api
+  name: Chulalongkorn University Tickets API
+  description: The tickets API from Chulalongkorn University — 2 operation(s) for tickets.
+  humanURL: https://digiverse.chula.ac.th/
+  baseURL: https://digital.car.chula.ac.th/do/oai/
+  tags:
+  - tickets
+  properties:
+  - type: OpenAPI
+    url: openapi/chulalongkorn-tickets-api-openapi.yml
+  - type: Documentation
+    url: https://account.it.chula.ac.th/wiki/doku.php
+  - type: APIReference
+    url: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-sso-user-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-sso-servicevalidation-example.json
+  - type: Authentication
+    url: authentication/chulalongkorn-authentication.yml
+  - type: SourceCode
+    url: https://github.com/krerk/ChulaSSO.Android
+  - type: CourseCatalog
+    url: https://cas.reg.chula.ac.th/class/course-schedule
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-course-study-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-course-studies-example.json
+- aid: chulalongkorn:chulalongkorn-users-api
+  name: Chulalongkorn University Users API
+  description: The users API from Chulalongkorn University — 4 operation(s) for users.
+  humanURL: https://digiverse.chula.ac.th/
+  baseURL: https://digital.car.chula.ac.th/do/oai/
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/chulalongkorn-users-api-openapi.yml
+  - type: Documentation
+    url: https://account.it.chula.ac.th/wiki/doku.php
+  - type: APIReference
+    url: https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-sso-user-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-sso-servicevalidation-example.json
+  - type: Authentication
+    url: authentication/chulalongkorn-authentication.yml
+  - type: SourceCode
+    url: https://github.com/krerk/ChulaSSO.Android
+  - type: CourseCatalog
+    url: https://cas.reg.chula.ac.th/class/course-schedule
+  - type: JSONSchema
+    url: json-schema/chulalongkorn-course-study-schema.json
+  - type: Examples
+    url: examples/chulalongkorn-course-studies-example.json
+- aid: chulalongkorn:chulalongkorn-2-fa-api
+  name: Chulalongkorn University 2 FA API
+  description: The 2 FA API from Chulalongkorn University — 5 operation(s) for 2 fa.
+  humanURL: https://digiverse.chula.ac.th/
+  baseURL: https://digital.car.chula.ac.th/do/oai/
+  tags:
+  - 2 FA
+  properties:
+  - type: OpenAPI
+    url: openapi/chulalongkorn-2-fa-api-openapi.yml
   - type: Documentation
     url: https://account.it.chula.ac.th/wiki/doku.php
   - type: APIReference

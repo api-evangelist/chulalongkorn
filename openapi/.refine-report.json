@@ -2,30 +2,61 @@
   "provider": "chulalongkorn",
   "sources": [
     "_original/chulalongkorn-course-schedule-openapi.yml",
-    "_original/chulalongkorn-sso-openapi.yml"
+    "_original/chulalongkorn-openapi.json"
   ],
   "outputs": [
     "chulalongkorn-curriculum-api-openapi.yml",
     "chulalongkorn-meta-api-openapi.yml",
-    "chulalongkorn-authentication-api-openapi.yml",
-    "chulalongkorn-validation-api-openapi.yml"
+    "chulalongkorn-2fa-api-openapi.yml",
+    "chulalongkorn-about-api-openapi.yml",
+    "chulalongkorn-chulasso-service-api-openapi.yml",
+    "chulalongkorn-html-api-openapi.yml",
+    "chulalongkorn-login-api-openapi.yml",
+    "chulalongkorn-logout-api-openapi.yml",
+    "chulalongkorn-qrvalidation-api-openapi.yml",
+    "chulalongkorn-servicevalidation-api-openapi.yml",
+    "chulalongkorn-admin-api-openapi.yml",
+    "chulalongkorn-myapps-api-openapi.yml",
+    "chulalongkorn-qr-api-openapi.yml",
+    "chulalongkorn-tickets-api-openapi.yml",
+    "chulalongkorn-users-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
-    "2 archived document(s) dropped as subsets of other archived documents",
+    "1 archived document(s) dropped as subsets of other archived documents",
     "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "chulalongkorn-course-schedule-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "chulalongkorn-sso-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "chulalongkorn-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "chulalongkorn-openapi.json: tagged paths GET /html/login.html -> Html",
+    "chulalongkorn-openapi.json: tagged paths GET / -> ChulaSSO Service",
+    "chulalongkorn-openapi.json: tagged paths GET /login -> Login",
+    "chulalongkorn-openapi.json: tagged paths POST /login -> Login",
+    "chulalongkorn-openapi.json: tagged paths GET /logout -> Logout",
+    "chulalongkorn-openapi.json: tagged paths POST /logout -> Logout",
+    "chulalongkorn-openapi.json: tagged paths POST /qrValidation -> QrValidation",
+    "chulalongkorn-openapi.json: tagged paths GET /serviceValidation -> ServiceValidation",
+    "chulalongkorn-openapi.json: tagged paths POST /serviceValidation -> ServiceValidation",
+    "chulalongkorn-openapi.json: tagged paths GET /about -> About",
+    "chulalongkorn-openapi.json: declared missing tag: 2fa",
+    "chulalongkorn-openapi.json: declared missing tag: About",
+    "chulalongkorn-openapi.json: declared missing tag: ChulaSSO Service",
+    "chulalongkorn-openapi.json: declared missing tag: Html",
+    "chulalongkorn-openapi.json: declared missing tag: Login",
+    "chulalongkorn-openapi.json: declared missing tag: Logout",
+    "chulalongkorn-openapi.json: declared missing tag: QrValidation",
+    "chulalongkorn-openapi.json: declared missing tag: ServiceValidation",
+    "chulalongkorn-openapi.json: declared missing tag: admin",
+    "chulalongkorn-openapi.json: declared missing tag: myapps",
+    "chulalongkorn-openapi.json: declared missing tag: qr",
+    "chulalongkorn-openapi.json: declared missing tag: tickets",
+    "chulalongkorn-openapi.json: declared missing tag: users",
+    "apis.yml register: written (+13 apis, 23 total)"
   ],
   "skipped": [
-    "_original/chulalongkorn-sso-openapi_2.yml: archived document superseded by a larger archived document",
     "_original/chulalongkorn-course-schedule-openapi_2.yml: archived document superseded by a larger archived document",
-    "chulalongkorn-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "chulalongkorn-curriculum-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "chulalongkorn-meta-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "chulalongkorn-validation-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+    "chulalongkorn-meta-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }

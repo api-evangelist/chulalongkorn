@@ -1,0 +1,20 @@
+openapi: 3.2.0
+info:
+  title: ChulaSSO Service Qr API
+  description: Service for ChulaSSO, CopyRight © 2022-present Krerk Piromsopa,Ph.D.
+  version: '2.0'
+tags:
+- name: qr
+paths:
+  /api/qr/myQR:
+    get:
+      tags:
+      - qr
+      summary: Get My Qr
+      operationId: get_my_qr_api_qr_myQR_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}

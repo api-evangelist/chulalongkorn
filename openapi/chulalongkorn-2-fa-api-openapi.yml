@@ -1,0 +1,207 @@
+openapi: 3.2.0
+info:
+  title: ChulaSSO Service 2fa API
+  description: Service for ChulaSSO, CopyRight © 2022-present Krerk Piromsopa,Ph.D.
+  version: '2.0'
+tags:
+- name: 2 FA
+paths:
+  /api/auth/totp/status:
+    get:
+      tags:
+      - 2 FA
+      summary: Get Status
+      operationId: get_status_api_auth_totp_status_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+  /api/auth/totp/enroll:
+    post:
+      tags:
+      - 2 FA
+      summary: Post Enroll
+      operationId: post_enroll_api_auth_totp_enroll_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollResponse'
+  /api/auth/totp/activate:
+    post:
+      tags:
+      - 2 FA
+      summary: Post Activate
+      operationId: post_activate_api_auth_totp_activate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivateInput'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/auth/totp/verify:
+    post:
+      tags:
+      - 2 FA
+      summary: Post Verify
+      operationId: post_verify_api_auth_totp_verify_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyInput'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/auth/totp/disable:
+    post:
+      tags:
+      - 2 FA
+      summary: Post Disable
+      operationId: post_disable_api_auth_totp_disable_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CodeInput'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    CodeInput:
+      properties:
+        code:
+          type: string
+          title: Code
+      type: object
+      required:
+      - code
+      title: CodeInput
+    VerifyInput:
+      properties:
+        challenge_token:
+          type: string
+          title: Challenge Token
+        code:
+          type: string
+          title: Code
+      type: object
+      required:
+      - challenge_token
+      - code
+      title: VerifyInput
+    EnrollResponse:
+      properties:
+        totp_id:
+          type: string
+          title: Totp Id
+        otpauth_uri:
+          type: string
+          title: Otpauth Uri
+        secret:
+          type: string
+          title: Secret
+        qr_png_b64:
+          type: string
+          title: Qr Png B64
+      type: object
+      required:
+      - totp_id
+      - otpauth_uri
+      - secret
+      - qr_png_b64
+      title: EnrollResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    StatusResponse:
+      properties:
+        enrolled:
+          type: boolean
+          title: Enrolled
+        backup_codes_remaining:
+          type: integer
+          title: Backup Codes Remaining
+      type: object
+      required:
+      - enrolled
+      - backup_codes_remaining
+      title: StatusResponse
+    ActivateInput:
+      properties:
+        totp_id:
+          type: string
+          title: Totp Id
+        code:
+          type: string
+          title: Code
+      type: object
+      required:
+      - totp_id
+      - code
+      title: ActivateInput
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

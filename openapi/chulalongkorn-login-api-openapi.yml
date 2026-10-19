@@ -1,0 +1,113 @@
+openapi: 3.2.0
+info:
+  title: ChulaSSO Service Login API
+  description: Service for ChulaSSO, CopyRight © 2022-present Krerk Piromsopa,Ph.D.
+  version: '2.0'
+tags:
+- name: Login
+paths:
+  /login:
+    get:
+      summary: Get Login
+      operationId: get_login_login_get
+      parameters:
+      - required: false
+        schema:
+          type: string
+          title: Service
+        name: service
+        in: query
+      - required: false
+        schema:
+          type: string
+          title: Servicename
+        name: serviceName
+        in: query
+      - required: false
+        schema:
+          type: string
+          title: App Id
+        name: app_id
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Login
+    post:
+      summary: Post Login
+      operationId: post_login_login_post
+      parameters:
+      - required: false
+        schema:
+          type: string
+          title: Service
+        name: service
+        in: query
+      - required: false
+        schema:
+          type: string
+          title: Servicename
+        name: serviceName
+        in: query
+      - required: false
+        schema:
+          type: string
+          title: App Id
+        name: app_id
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Login
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

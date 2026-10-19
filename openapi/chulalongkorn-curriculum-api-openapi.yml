@@ -2,7 +2,9 @@ openapi: 3.2.0
 info:
   title: CU-REG Course Schedule Curriculum API
   version: 2026.8.21-1644-1a51328
-  description: The read-only JSON API behind CU-REG Course Schedule, the public course, curriculum and class-timetable browser operated by the Office of the Registrar, Chulalongkorn University, at https://cas.reg.chula.ac.th/class/course-schedule.
+  description: 'The read-only JSON API behind CU-REG Course Schedule, the public course, curriculum and class-timetable browser operated by the Office of the Registrar, Chulalongkorn University, at https://cas.reg.chula.ac.th/class/course-schedule. The browser is an Angular single-page application; this document describes the backend it calls, which is served from the same origin under /class/api and requires no credentials.
+
+    THIS DOCUMENT WAS NOT PUBLISHED BY CHULALONGKORN UNIVERSITY. It is an API Evangelist reconstruction, and its scope is deliberately narrow: only operations that were fetched and returned HTTP 200 on 2026-09-01 are described as paths. The application''s own bundle (main-STPCQOCS.js) declares a further thirteen endpoint names against the same base; every one of them returned HTTP 404 to an unauthenticated request from outside the campus network on that date, so they are recorded under x-client-declared-endpoints as observations rather than promoted to paths we cannot demonstrate.'
   contact:
     name: Office of the Registrar, Chulalongkorn University
     url: https://www.reg.chula.ac.th/

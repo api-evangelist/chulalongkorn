@@ -1,0 +1,113 @@
+openapi: 3.2.0
+info:
+  title: ChulaSSO Service Service Validation API
+  description: Service for ChulaSSO, CopyRight © 2022-present Krerk Piromsopa,Ph.D.
+  version: '2.0'
+tags:
+- name: ServiceValidation
+paths:
+  /serviceValidation:
+    get:
+      summary: Get Service Validation
+      operationId: get_service_validation_serviceValidation_get
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: Deeticket
+        name: DeeTicket
+        in: header
+      - required: true
+        schema:
+          type: string
+          title: Deeappid
+        name: DeeAppId
+        in: header
+      - required: true
+        schema:
+          type: string
+          title: Deeappsecret
+        name: DeeAppSecret
+        in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - ServiceValidation
+    post:
+      summary: Post Service Validation
+      operationId: post_service_validation_serviceValidation_post
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: Deeticket
+        name: DeeTicket
+        in: header
+      - required: true
+        schema:
+          type: string
+          title: Deeappid
+        name: DeeAppId
+        in: header
+      - required: true
+        schema:
+          type: string
+          title: Deeappsecret
+        name: DeeAppSecret
+        in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - ServiceValidation
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

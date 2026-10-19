@@ -1,0 +1,332 @@
+openapi: 3.2.0
+info:
+  title: ChulaSSO Service Myapps API
+  description: Service for ChulaSSO, CopyRight © 2022-present Krerk Piromsopa,Ph.D.
+  version: '2.0'
+tags:
+- name: myapps
+paths:
+  /api/myapps/:
+    get:
+      tags:
+      - myapps
+      summary: List Apps
+      operationId: list_apps_api_myapps__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/MyAppPublic'
+                type: array
+                title: Response List Apps Api Myapps  Get
+    post:
+      tags:
+      - myapps
+      summary: Create App
+      operationId: create_app_api_myapps__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MyAppCreateIn'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyAppCreatedOut'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/myapps/{app_id}:
+    get:
+      tags:
+      - myapps
+      summary: Get App
+      operationId: get_app_api_myapps__app_id__get
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: App Id
+        name: app_id
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyAppPublic'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - myapps
+      summary: Delete App
+      operationId: delete_app_api_myapps__app_id__delete
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: App Id
+        name: app_id
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - myapps
+      summary: Update App
+      operationId: update_app_api_myapps__app_id__patch
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: App Id
+        name: app_id
+        in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MyAppUpdateIn'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyAppPublic'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/myapps/{app_id}/rotate-secret:
+    post:
+      tags:
+      - myapps
+      summary: Rotate Secret
+      operationId: rotate_secret_api_myapps__app_id__rotate_secret_post
+      parameters:
+      - required: true
+        schema:
+          type: string
+          title: App Id
+        name: app_id
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyAppSecretOut'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    MyAppCreateIn:
+      properties:
+        app_name:
+          type: string
+          title: App Name
+        description:
+          type: string
+          title: Description
+          default: ''
+        service_url:
+          type: string
+          title: Service Url
+        app_icon:
+          type: string
+          title: App Icon
+        notes:
+          type: string
+          title: Notes
+      type: object
+      required:
+      - app_name
+      - service_url
+      title: MyAppCreateIn
+    MyAppUpdateIn:
+      properties:
+        app_name:
+          type: string
+          title: App Name
+        description:
+          type: string
+          title: Description
+        service_url:
+          type: string
+          title: Service Url
+        app_icon:
+          type: string
+          title: App Icon
+        notes:
+          type: string
+          title: Notes
+      type: object
+      title: MyAppUpdateIn
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    MyAppPublic:
+      properties:
+        app_id:
+          type: string
+          title: App Id
+        app_name:
+          type: string
+          title: App Name
+        app_icon:
+          type: string
+          title: App Icon
+        description:
+          type: string
+          title: Description
+        service_url:
+          type: string
+          title: Service Url
+        notes:
+          type: string
+          title: Notes
+        username:
+          type: string
+          title: Username
+        status:
+          type: string
+          title: Status
+        create_time:
+          type: string
+          format: date-time
+          title: Create Time
+        update_time:
+          type: string
+          format: date-time
+          title: Update Time
+        expire_time:
+          type: string
+          format: date-time
+          title: Expire Time
+      type: object
+      required:
+      - app_id
+      - status
+      title: MyAppPublic
+    MyAppSecretOut:
+      properties:
+        app_id:
+          type: string
+          title: App Id
+        app_secret:
+          type: string
+          title: App Secret
+      type: object
+      required:
+      - app_id
+      - app_secret
+      title: MyAppSecretOut
+    MyAppCreatedOut:
+      properties:
+        app_id:
+          type: string
+          title: App Id
+        app_name:
+          type: string
+          title: App Name
+        app_icon:
+          type: string
+          title: App Icon
+        description:
+          type: string
+          title: Description
+        service_url:
+          type: string
+          title: Service Url
+        notes:
+          type: string
+          title: Notes
+        username:
+          type: string
+          title: Username
+        status:
+          type: string
+          title: Status
+        create_time:
+          type: string
+          format: date-time
+          title: Create Time
+        update_time:
+          type: string
+          format: date-time
+          title: Update Time
+        expire_time:
+          type: string
+          format: date-time
+          title: Expire Time
+        app_secret:
+          type: string
+          title: App Secret
+      type: object
+      required:
+      - app_id
+      - status
+      - app_secret
+      title: MyAppCreatedOut
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
