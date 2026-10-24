@@ -397,6 +397,8 @@ apis:
   humanURL: https://digiverse.chula.ac.th/
   baseURL: https://digital.car.chula.ac.th/do/oai/
   tags:
+  - Admin
+  tags_raw:
   - admin
   properties:
   - type: OpenAPI
@@ -454,6 +456,8 @@ apis:
   humanURL: https://digiverse.chula.ac.th/
   baseURL: https://digital.car.chula.ac.th/do/oai/
   tags:
+  - HTML
+  tags_raw:
   - Html
   properties:
   - type: OpenAPI
@@ -538,6 +542,8 @@ apis:
   humanURL: https://digiverse.chula.ac.th/
   baseURL: https://digital.car.chula.ac.th/do/oai/
   tags:
+  - MyApps
+  tags_raw:
   - myapps
   properties:
   - type: OpenAPI
@@ -566,6 +572,8 @@ apis:
   humanURL: https://digiverse.chula.ac.th/
   baseURL: https://digital.car.chula.ac.th/do/oai/
   tags:
+  - QR
+  tags_raw:
   - qr
   properties:
   - type: OpenAPI
@@ -651,6 +659,8 @@ apis:
   humanURL: https://digiverse.chula.ac.th/
   baseURL: https://digital.car.chula.ac.th/do/oai/
   tags:
+  - Ticketing
+  tags_raw:
   - tickets
   properties:
   - type: OpenAPI
@@ -679,6 +689,8 @@ apis:
   humanURL: https://digiverse.chula.ac.th/
   baseURL: https://digital.car.chula.ac.th/do/oai/
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
@@ -707,6 +719,8 @@ apis:
   humanURL: https://digiverse.chula.ac.th/
   baseURL: https://digital.car.chula.ac.th/do/oai/
   tags:
+  - 2FA
+  tags_raw:
   - 2 FA
   properties:
   - type: OpenAPI
