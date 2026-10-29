@@ -1,4 +1,4 @@
-# Chulalongkorn University (chulalongkorn)
+# Chulalongkorn University
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,48 +64,136 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Chulalongkorn University is Thailand's oldest and a leading public research university, located in Bangkok and ranked #229 in the QS World University Rankings 2025. This repository catalogs its public developer/API footprint as an [APIs.json](https://apisjson.org) provider profile. The footprint is limited and largely gated: a campus single sign-on (Chula SSO) authentication API, an institutional repository (CUIR / Chula Digiverse on DSpace) with OAI-PMH and REST interfaces, and a staff-only central data exchange (CU Data Gateway) offering an online API mode. There is no unified, openly documented public developer portal.
+Chulalongkorn University is Thailand's oldest public research university, founded in 1917 in Bangkok. Its programmable footprint is small, real, and almost entirely undeclared: there is no developer portal, no open data portal, no published specification of any kind, and no self-service registration anywhere in the estate. What it does operate are two genuine institution-run surfaces. Chula SSO at account.it.chula.ac.th has been in production since January 2017 and is documented endpoint-by-endpoint on a public wiki — a modified CAS 1.0 protocol with an added application-authentication step, backed by the university LDAP directory, with keys issued by email rather than by a console. The Office of the Registrar's CU-REG Course Schedule application answers unauthenticated JSON at cas.reg.chula.ac.th/class/api for its curriculum register and build version, though the thirteen further endpoints its own client declares return 404 from outside the campus network. Everything else that looks like a Chulalongkorn API belongs to somebody else: Chula Digital Collections, which serves the university's only working OAI-PMH endpoint, is a bepress Digital Commons tenancy (digital.car.chula.ac.th is a CNAME to dcchula.bepress.com, adminEmail dc-support@elsevier.com); federated login is a Microsoft Entra ID tenant; DOIs are registered through DataCite and, faculty by faculty, through eleven separate Crossref member records. The institution's own DigiVerse repository publishes no machine-readable interface at all, and the previously recorded claim that it is a DSpace deployment exposing DSpace REST and OAI-PMH does not survive probing. The central data exchange, CU Data Gateway, is restricted to assigned university personnel and unreachable from outside the campus network.
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/chulalongkorn/refs/heads/main/apis.yml
-- Run it with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=chulalongkorn-api-evangelist&utm_content=repo
+**Areas:** Education · Higher Education · University · Research · Thailand · Bangkok · Identity Federation · SSO · Course Catalog · Research Repository · Library · Open Access
 
-## Type
+## Chulalongkorn University on APIs.io
 
-- Index / Consumer / 3rd-Party
+Everything profiled for Chulalongkorn University is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/chulalongkorn/](https://apis.io/providers/chulalongkorn/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (12)
 
-Education, Higher Education, University, Thailand, Identity, Single Sign-On, Institutional Repository, Open Access, OAI-PMH
+- [Chula DigiVerse — Institutional Digital Repository](https://apis.io/apis/chulalongkorn/digiverse/) — The university's digital preservation platform for theses, dissertations, rare books, multimedia and digitised manuscripts, operated by the Office of…
+- [Chula Digital Collections (bepress Digital Commons tenant)](https://apis.io/apis/chulalongkorn/digital-collections/) — The university's open-access journals, theses and ETD platform, and the only working OAI-PMH endpoint in the estate. The Identify response names "Chula…
+- [Chulalongkorn University Identity Federation (Microsoft Entra ID tenant)](https://apis.io/apis/chulalongkorn/entra-federation/) — The university's cloud identity, and the most complete machine-readable contract anywhere in this profile. Entra tenant 271d5e7b-1350-4b96-ab84-52dbda4cf40c…
+- [DataCite Membership (consortium organization lygd)](https://apis.io/apis/chulalongkorn/datacite/) — Chulalongkorn University is a DataCite consortium organization, provider id lygd, country TH, with one registered repository — lygd.aguxul, "Chula…
+- [Crossref Membership (eleven faculty and institute member records)](https://apis.io/apis/chulalongkorn/crossref/) — Chulalongkorn registers Crossref DOIs through eleven separate member records, one per faculty, institute or office, each with its own prefix — Engineering…
+- [ROR Registration (https://ror.org/028wp3y58)](https://apis.io/apis/chulalongkorn/ror/) — Chulalongkorn University's Research Organization Registry record, carrying the Thai and English names, the acronym CU, ten Crossref Funder IDs, GRID…
+- [Chula Library Discovery (EBSCO tenant)](https://apis.io/apis/chulalongkorn/library-discovery/) — The Office of Academic Resources fronts its licensed-content discovery through EBSCO, under the named customer account chulalun. The links published on…
+- [CU Data Gateway](https://apis.io/apis/chulalongkorn/data-gateway/) — The university's central data exchange, consolidating and sharing data across departments in two connection modes — batch over SFTP and online over an API.…
+- [Chulalongkorn University Authentication API](https://apis.io/apis/chulalongkorn/chulalongkorn-authentication-api/) — Session establishment and teardown
+- [Chulalongkorn University Curriculum API](https://apis.io/apis/chulalongkorn/chulalongkorn-curriculum-api/) — Degree programs and fields of study
+- [Chulalongkorn University Meta API](https://apis.io/apis/chulalongkorn/chulalongkorn-meta-api/) — Service metadata
+- [Chulalongkorn University Validation API](https://apis.io/apis/chulalongkorn/chulalongkorn-validation-api/) — Ticket validation for relying applications
 
-## APIs
+### Published properties
 
-- **Chula SSO Authentication API** — Single sign-on for authenticating Chula students/staff; integration requires an appid/appsecret requested by email (not self-service). Docs: https://account.it.chula.ac.th/wiki/doku.php — sample code: https://github.com/krerk/ChulaSSO.Android
-- **CUIR / Chula Digiverse Repository (OAI-PMH & DSpace REST)** — DSpace-based institutional repository of theses, papers, and archives, exposing standard OAI-PMH and REST interfaces. Docs: https://digiverse.chula.ac.th/
-- **CU Data Gateway API** — Central campus data exchange with Batch (SFTP) and Online (API) modes; restricted to assigned university personnel, no public docs. Docs: https://www.it.chula.ac.th/service/data-gateway/
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Plans / Rate Limits / FinOps
+#### JSON Schema (2)
 
-- Plans & Pricing: [plans/chulalongkorn-plans-pricing.yml](plans/chulalongkorn-plans-pricing.yml)
-- Rate Limits: [rate-limits/chulalongkorn-rate-limits.yml](rate-limits/chulalongkorn-rate-limits.yml)
-- FinOps: [finops/chulalongkorn-finops.yml](finops/chulalongkorn-finops.yml)
+The data models the API reads and writes.
 
-## Timestamps
+- [CU-REG Course Study (Degree Program)](https://apis.io/schemas/chulalongkorn/chulalongkorn-course-study/)
+- [Chula SSO Authenticated User](https://apis.io/schemas/chulalongkorn/chulalongkorn-sso-user/)
 
-- Created: 2026-06-03
-- Modified: 2026-06-03
+#### JSON-LD (1)
 
-## Common Properties
+Linked-data contexts for the provider's vocabulary.
 
-- Website: https://www.chula.ac.th/en/
-- GitHub: https://github.com/ChulalongkornUniversity
-- LinkedIn: https://www.linkedin.com/school/chulalongkorn-university/
-- Developer/IT Services: https://www.it.chula.ac.th/
-- Review: [review.yml](review.yml)
+- [Chulalongkorn Context](https://apis.io/jsonld/chulalongkorn/chulalongkorn-context/)
 
-## Notes
+#### Examples (2)
 
-All APIs and URLs were verified against public pages where possible. The Chula SSO and CU Data Gateway APIs require credentials/keys granted on request and are not self-service. The DSpace OAI-PMH and REST endpoints returned HTTP 500 to external probes, and the Data Gateway portal (datagateway.chula.ac.th) did not resolve from outside the campus network; these are documented honestly in [review.yml](review.yml). No endpoints were fabricated — base/doc URLs derive from confirmed pages or standard DSpace conventions.
+Example requests and responses.
 
-## Maintainers
+- [Chulalongkorn Course Studies Example](https://apis.io/examples/chulalongkorn/chulalongkorn-course-studies-example/)
+- [Chulalongkorn Sso Servicevalidation Example](https://apis.io/examples/chulalongkorn/chulalongkorn-sso-servicevalidation-example/)
 
-- Kin Lane — kin@apievangelist.com
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Chulalongkorn Authentication](https://apis.io/security/chulalongkorn/chulalongkorn-authentication/)
+- [Chulalongkorn Domain Security](https://apis.io/security/chulalongkorn/chulalongkorn-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Chulalongkorn Plans Pricing](https://apis.io/plans/chulalongkorn/chulalongkorn-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Chulalongkorn Rate Limits](https://apis.io/rate-limits/chulalongkorn/chulalongkorn-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Chulalongkorn Finops](https://apis.io/finops/chulalongkorn/chulalongkorn-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.chula.ac.th/en/)
+- [Documentation](https://account.it.chula.ac.th/wiki/doku.php)
+- [API reference](https://account.it.chula.ac.th/wiki/doku.php?id=how_does_it_work)
+- [Support](https://portal.it.chula.ac.th/home)
+
+## API Evangelist rating
+
+**Kin Score 25.4** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 44.1 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 33.3 |
+| Access clarity | 5.3 |
+
+**Agent readiness 21.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/chulalongkorn/](https://apis.io/providers/chulalongkorn/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Chulalongkorn University: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/chulalongkorn/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
